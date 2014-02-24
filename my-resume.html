@@ -1,0 +1,266 @@
+<link rel="import" href="bower_components/polymer-media-query/polymer-media-query.html">
+
+<link rel="import" href="bower_components/polymer-flex-layout/polymer-flex-layout.html">
+
+<link rel="import" href="a-skill.html">
+
+<polymer-element name="my-resume">
+
+  <template>
+
+    <style>
+
+      header,
+      main,
+      footer {
+        width: 100%;
+        z-index: 2;
+      }
+
+      header {
+        background: rgba(255, 255, 255, 1);
+      }
+
+      footer {
+        background: rgba(255, 255, 255, 1);
+      }
+
+      h1,
+      strong {
+        font-family: "Libre Baskerville", serif;
+      }
+
+      #title {
+        font-size: 2rem;
+        font-weight: 300;
+        color: rgba(74, 74, 74, 1);
+        margin: 0 2rem 2rem 2rem;
+      }
+
+      #title.large {
+        font-size: 3rem;
+        margin: 3rem 3rem 3rem 0;
+      }
+
+      main {
+        background: rgba(255, 255, 255, 1);
+      }
+
+      a-skill {
+        width: 100%;
+      }
+
+      #name {
+        width: 100%;
+        position: fixed;
+        z-index: 1;
+      }
+
+      #name h1 {
+        font-weight: 700;
+        color: rgba(255, 255, 255, .8);
+      }
+
+      #name strong {
+        color: rgba(255, 255, 255, .9);
+      }
+
+      #me {
+        border-radius: 100px;
+        width: 100px;
+        margin: 2rem;
+      }
+
+      #me.large {
+        border-radius: 200px;
+        min-width: 200px;
+        min-height: 200px;
+        margin: 3rem;
+      }
+
+    </style>
+
+    <polymer-media-query query="max-width: 40rem" queryMatches="{{ devices.mobile }}"></polymer-media-query>
+    <polymer-media-query query="(min-width: 40.063rem) and (max-width: 64rem)" queryMatches="{{ devices.medium }}"></polymer-media-query>
+    <polymer-media-query query="(min-width: 64.063rem) and (max-width: 90rem)" queryMatches="{{ devices.large }}"></polymer-media-query>
+    <polymer-media-query query="(min-width: 90.063rem) and (max-width: 120rem)" queryMatches="{{ devices.xlarge }}"></polymer-media-query>
+    <polymer-media-query query="min-width: 120.063rem" queryMatches="{{ devices.xxlarge }}"></polymer-media-query>
+
+    <template if="{{ devices.mobile }}">
+      <style>
+
+        header {
+          margin-top: 290px;
+        }
+
+        #name h1 {
+          font-size: 2rem;
+          margin: 4rem 4rem 0 4rem;
+        }
+
+        #name strong {
+          font-size: 3rem;
+        }
+
+      </style>
+    </template>
+
+    <template if="{{ devices.medium }}">
+      <style>
+
+        header { margin-top: 464px; }
+
+        #name h1 {
+          font-size: 3rem;
+          margin: 6rem 6rem 0 6rem;
+        }
+
+        #name strong {
+          font-size: 4rem;
+        }
+
+      </style>
+    </template>
+
+    <template if="{{ devices.large }}">
+      <style>
+
+        header {
+          margin-top: 653px;
+        }
+
+        #name h1 {
+          font-size: 4rem;
+          margin: 8rem 8rem 0 8rem;
+        }
+
+        #name strong {
+          font-size: 5rem;
+        }
+      </style>
+    </template>
+
+    <template if="{{ devices.xlarge }}">
+      <style>
+
+        header {
+          margin-top: 871px;
+        }
+
+        #name h1 {
+          font-size: 5rem;
+          margin: 10rem 10rem 0 10rem;
+        }
+
+        #name strong {
+          font-size: 6rem;
+        }
+
+      </style>
+    </template>
+
+    <template if="{{ devices.xxlarge }}">
+      <style>
+
+        header {
+          margin-top: 1161px;
+        }
+
+        #name h1 {
+          font-size: 6rem;
+          margin: 3rem 3rem 0 3rem;
+        }
+
+        #name strong {
+          font-size: 7rem;
+        }
+
+      </style>
+    </template>
+
+    <div id="name">
+      <polymer-flex-layout isContainer justify="end">
+        <h1 align="right"><strong>Hi!</strong><br>My name is Davy Duperron.</h1>
+      </polymer-flex-layout>
+    </div>
+      
+    <polymer-flex-layout isContainer vertical align="center" justify="center">
+
+      <header>
+
+        <template if="{{ devices.mobile || devices.medium }}">
+          <polymer-flex-layout isContainer vertical align="center" justify="center">
+            <img src="./img/me-mobile.jpg" id="me">
+            <h1 align="center" id="title">
+              I am a full stack developer.<br>
+              I create <strong>quality products</strong> that use web technologies.
+            </h1>
+          </polymer-flex-layout>
+        </template>
+
+        <template if="{{ devices.large || devices.xlarge || devices.xxlarge }}">
+          <polymer-flex-layout isContainer align="center" justify="center">
+            <img src="./img/me-large.jpg" id="me" class="large">
+            <h1 align="start" id="title" class="large">
+              I am a full stack developer.<br>
+              I create <strong>quality products</strong> that use web technologies.
+            </h1>
+          </polymer-flex-layout>
+        </template>
+
+      </header>
+
+      <main>
+
+        <polymer-flex-layout isContainer vertical align="center" justify="center">
+
+        <template repeat="{{ skill in skills }}">
+          <a-skill type="{{ skill }}"></a-skill>
+        </template>
+
+        </polymer-flex-layout>
+
+      </main>
+
+      <footer>
+        
+        <polymer-flex-layout isContainer align="center" justify="center">
+
+          <p>fghfgh</p>
+          <p>fghfgh</p>
+          <p>fghfgh</p>
+
+        </polymer-flex-layout>
+
+      </footer>
+
+    </polymer-flex-layout>
+
+  </template>
+  <script>
+    Polymer('my-resume', {
+      ready : function () {
+        this.devices = {},
+        this.skills = [
+          { color: 'prune',
+            name : 'Front-end',
+            description : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+            technologies : [
+              'Polymer',
+              'HTML5',
+              'CSS3'
+            ]
+          },
+          { color: 'grey',
+            name : 'Back-end',
+            description : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+            technologies : [
+              'Node.js'
+            ]
+          },
+        ];
+      }
+    });
+  </script>
+
+</polymer-element>

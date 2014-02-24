@@ -1,0 +1,13 @@
+{
+  "name": "my-resume",
+  "version": "0.1.0",
+  "authors": [
+    "yamafaktory <yamafaktory@gmail.com>"
+  ],
+  "description": "It's my resume, hire me!",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "polymer": "~0.2.0"
+  }
+}

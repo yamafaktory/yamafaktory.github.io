@@ -1,0 +1,59 @@
+*,
+*::after,
+*::before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  text-size-adjust: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  margin: 0;
+}
+
+/*  Mobile */
+
+@media only screen and (max-width: 40rem) {
+  html {
+    background: url("./img/mountain-mobile.jpg") no-repeat top center fixed;
+  }
+}
+
+/*  Medium */
+
+@media only screen and (min-width: 40.063rem) and (max-width: 64rem) {
+  html {
+    background: url("./img/mountain-medium.jpg") no-repeat top center fixed;
+  }
+}
+
+/*  large */
+
+@media only screen and (min-width: 64.063rem) and (max-width: 90rem) {
+  html {
+    background: url("./img/mountain-large.jpg") no-repeat top center fixed;
+  }
+}
+
+/*  xlarge */
+
+@media only screen and (min-width: 90.063rem) and (max-width: 120rem) {
+  html {
+    background: url("./img/mountain-xlarge.jpg") no-repeat top center fixed;
+  }
+}
+
+/*  xxlarge */
+
+@media only screen and min-width: 120.063rem {
+  html {
+    background: url("./img/mountain-xxlarge.jpg") no-repeat top center fixed;
+  }
+}

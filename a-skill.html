@@ -1,0 +1,94 @@
+<polymer-element name="a-skill" attributes="type">
+
+  <template>
+
+    <style>
+
+      h2, p {
+        font-family: "Libre Baskerville", serif;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin: 3rem;
+      }
+
+      p {
+        max-width: 30rem;
+        margin: 3rem;
+      }
+
+      ul {
+        list-style: none;
+        margin: 3rem;
+      }
+
+      .prune {
+        background: rgba(42, 30, 47, .8);
+      }
+
+      .prune h2 {
+        color: rgba(255, 255, 255, 1);
+      }
+
+      .prune p {
+        color: rgba(255, 255, 255, .9);
+      }
+
+      .grey {
+        background: rgba(40, 40, 40, 1);
+      }
+
+      .grey h2 {
+        color: rgba(170, 170, 170, 1);
+      }
+
+      .grey p {
+        color: rgba(170, 170, 170, .9);
+      }
+      
+    </style>
+
+    <section class="{{ type.color }}">
+
+      <polymer-flex-layout isContainer vertical align="center">
+
+        <polymer-flex-layout isContainer align="left">
+
+          <article>
+
+            <h2>{{ type.name }}</h2>
+
+            <p>{{ type.description }}</p>
+
+          </article>
+
+          <polymer-flex-layout isContainer vertical align="center">
+
+            <ul>
+
+              <template repeat="{{ tech in type.technologies }}">
+                <li>{{ tech }}</li>
+              </template>
+
+            </ul>
+
+          </polymer-flex-layout>
+
+        </polymer-flex-layout>
+
+      </polymer-flex-layout>
+
+    </section>
+
+  </template>
+
+  <script>
+    Polymer('a-skill', {
+      ready : function () {
+
+      }
+    });
+  </script>
+
+</polymer-element>
