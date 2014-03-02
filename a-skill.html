@@ -10,12 +10,11 @@
 
       h2 {
         font-size: 2rem;
-        margin: 3rem;
+        margin: 3rem 3rem 0 3rem;
       }
 
       p {
-        max-width: 30rem;
-        margin: 3rem;
+        margin: 1rem 3rem 3rem 3rem;
       }
 
       ul {
@@ -28,7 +27,7 @@
       }
 
       .prune h2 {
-        color: rgba(255, 255, 255, 1);
+        color: rgba(230, 230, 230, 1);
       }
 
       .prune p {
@@ -51,31 +50,28 @@
 
     <section class="{{ type.color }}">
 
-      <polymer-flex-layout isContainer vertical align="center">
+      <polymer-flex-layout isContainer align="center" justify="center">
 
-        <polymer-flex-layout isContainer align="left">
+        <article flex>
 
-          <article>
+          <h2 align="start">{{ type.name }}</h2>
 
-            <h2>{{ type.name }}</h2>
+          <p align="start">{{ type.description }}</p>
 
-            <p>{{ type.description }}</p>
+        </article>
 
-          </article>
+        <ul align="start">
 
-          <polymer-flex-layout isContainer vertical align="center">
+          <template repeat="{{ tech in type.technologies }}">
+            <li>
+              <a href="{{ tech.url }}">
+                <h3>{{ tech.name }}</h3>
+                <img src="{{ tech.logo }}">
+              </a>
+            </li>
+          </template>
 
-            <ul>
-
-              <template repeat="{{ tech in type.technologies }}">
-                <li>{{ tech }}</li>
-              </template>
-
-            </ul>
-
-          </polymer-flex-layout>
-
-        </polymer-flex-layout>
+        </ul>
 
       </polymer-flex-layout>
 
