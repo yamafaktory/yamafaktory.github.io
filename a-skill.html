@@ -1,8 +1,29 @@
-<polymer-element name="a-skill" attributes="type">
+<polymer-element name="a-skill" attributes="type devices">
 
   <template>
 
     <style>
+
+      a {
+        text-decoration: none;
+      }
+
+      img {
+        margin: 30px;
+        width: 60px;
+        height: 60px;
+        opacity: .9;
+      }
+
+      img.large {
+        margin: 60px;
+        width: 120px;
+        height: 120px;
+      }
+
+      img:hover {
+        opacity: 1;
+      }
 
       h2, p {
         font-family: "Libre Baskerville", serif;
@@ -13,13 +34,59 @@
         margin: 3rem 3rem 0 3rem;
       }
 
+      h3 {
+        font-family: "Open Sans", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, .2);
+        text-align: center;
+      }
+
       p {
         margin: 1rem 3rem 3rem 3rem;
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+      }
+
+      h2.large {
+        font-size: 3rem;
+      }
+
+      h3.large {
+        font-size: 1.5rem;
+      }
+
+      p.large {
+        font-size: 1.4rem;
+        line-height: 2.2rem;
       }
 
       ul {
         list-style: none;
+        padding: 0;
+        text-align: center;
+      }
+
+      li {
+        display: inline-block;
+        margin: 2rem;
+      }
+
+      li.large {
         margin: 3rem;
+      }
+
+      .circle {
+        background: rgba(0, 0, 0, .05);
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+      }
+
+      .circle.large {
+        width: 240px;
+        height: 240px;
       }
 
       .prune {
@@ -27,7 +94,7 @@
       }
 
       .prune h2 {
-        color: rgba(230, 230, 230, 1);
+        color: rgba(255, 255, 255, 1);
       }
 
       .prune p {
@@ -50,25 +117,48 @@
 
     <section class="{{ type.color }}">
 
-      <polymer-flex-layout isContainer align="center" justify="center">
+      <polymer-flex-layout isContainer vertical align="center" justify="center">
 
-        <article flex>
+        <article>
 
-          <h2 align="start">{{ type.name }}</h2>
+          <template if="{{ devices.mobile || devices.medium }}">
+            <h2 align="center">{{ type.name }}</h2>
+            <p align="center">{{ type.description }}</p>
+          </template>
 
-          <p align="start">{{ type.description }}</p>
+          <template if="{{ devices.large || devices.xlarge || devices.xxlarge }}">
+            <h2 align="center" class="large">{{ type.name }}</h2>
+            <p align="center" class="large">{{ type.description }}</p>
+          </template>
 
         </article>
 
-        <ul align="start">
+        <ul>
 
           <template repeat="{{ tech in type.technologies }}">
-            <li>
-              <a href="{{ tech.url }}">
-                <h3>{{ tech.name }}</h3>
-                <img src="{{ tech.logo }}">
-              </a>
-            </li>
+            
+                <template if="{{ devices.mobile || devices.medium }}">
+                  <li>
+                    <a href="{{ tech.url }}">
+                      <div class="circle">
+                        <img src="{{ tech.logo }}">
+                      </div>
+                      <h3>{{ tech.name }}</h3>
+                    </a>
+                  </li>
+                </template>
+
+                <template if="{{ devices.large || devices.xlarge || devices.xxlarge }}">
+                  <li class="large">
+                    <a href="{{ tech.url }}">
+                      <div class="circle large">
+                        <img src="{{ tech.logo }}" class="large">
+                      </div>
+                      <h3 class="large">{{ tech.name }}</h3>
+                    </a>
+                  </li>
+                </template>
+              
           </template>
 
         </ul>

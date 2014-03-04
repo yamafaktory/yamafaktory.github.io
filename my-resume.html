@@ -30,6 +30,10 @@
         font-family: "Libre Baskerville", serif;
       }
 
+      strong {
+        font-weight: 700;
+      }
+
       #title {
         font-size: 2rem;
         font-weight: 300;
@@ -66,13 +70,12 @@
       }
 
       #me {
-        border-radius: 100px;
+        border-radius: 50%;
         width: 100px;
         margin: 2rem;
       }
 
       #me.large {
-        border-radius: 200px;
         min-width: 200px;
         min-height: 200px;
         margin: 3rem;
@@ -193,7 +196,8 @@
             <img src="./img/me-mobile.jpg" id="me">
             <h1 align="center" id="title">
               I am a full stack developer.<br>
-              I create <strong>quality products</strong> that use web technologies.
+              I create <strong>quality products</strong> that use web technologies.<br>
+              I am fond of learning everything related to the web and using <strong>bleeding-edge technologies</strong>.
             </h1>
           </polymer-flex-layout>
         </template>
@@ -203,7 +207,8 @@
             <img src="./img/me-large.jpg" id="me" class="large">
             <h1 align="start" id="title" class="large">
               I am a full stack developer.<br>
-              I create <strong>quality products</strong> that use web technologies.
+              I create <strong>quality products</strong> that use web technologies.<br>
+              I am fond of learning everything related to the web and using <strong>bleeding-edge technologies</strong>.
             </h1>
           </polymer-flex-layout>
         </template>
@@ -215,7 +220,7 @@
         <polymer-flex-layout isContainer vertical align="center" justify="center">
 
         <template repeat="{{ skill in skills }}">
-          <a-skill type="{{ skill }}"></a-skill>
+          <a-skill type="{{ skill }}" devices="{{ devices }}"></a-skill>
         </template>
 
         </polymer-flex-layout>
@@ -244,27 +249,42 @@
         this.skills = [
           { color : 'prune',
             name : 'Front-end',
-            description : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+            description : 'For years, I am stuck in love with web technologies (object-oriented & vanilla JavaScript, HTML5, CSS3, canvas, DOM, jQuery, JSON, Polymer, websockets). I have strong fundamentals in the development of complex responsive applications for the Web relying on modern tools (automation with Gulp / Grunt for minifying - concatenating - even JSHint-ing resources, templates, CSS preprocessors). Moreover, I do care about performance and mobile-first web design.',
             technologies : [
+              { name : 'HTML5 & CSS3',
+                url : 'http://www.w3.org/TR/html5/',
+                logo : './img/html5.svg'
+              },
+              { name : 'JavaScript',
+                url : 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+                logo : './img/javascript.svg'
+              },
               { name : 'Polymer',
-                url : '',
-                logo : ''
+                url : 'http://www.polymer-project.org/',
+                logo : './img/polymer.svg'
               },
-              { name : 'HTML5',
-                url : '',
-                logo : ''
-              },
-              { name : 'CSS3',
-                url : '',
-                logo : ''
-              },
+              { name : 'Responsive Design',
+                url : 'http://www.polymer-project.org/',
+                logo : './img/responsive.svg'
+              }
             ]
           },
           { color: 'grey',
             name : 'Back-end',
-            description : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+            description : 'I - git - push code relying on the event-driven architecture of the Node.js platform, using web application frameworks such as Express and Koa. I love NoSQL databases.',
             technologies : [
-              'Node.js'
+              { name : 'Node.js',
+                url : 'http://nodejs.org/',
+                logo : './img/node.js.svg'
+              },
+              { name : 'MongoDB',
+                url : 'http://www.mongodb.org/',
+                logo : './img/mongoDB.svg'
+              },
+              { name : 'RethinkDB',
+                url : 'http://www.rethinkdb.com/',
+                logo : './img/rethinkDB.svg'
+              }
             ]
           },
         ];

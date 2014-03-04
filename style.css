@@ -6,6 +6,18 @@
   box-sizing: border-box;
 }
 
+::-moz-selection {
+  background: rgba(172, 239, 76, 1);
+  color: rgba(255, 255, 255, 1);
+  text-shadow: none;
+}
+
+::selection {
+  background: rgba(172, 239, 76, 1);
+  color: rgba(255, 255, 255, 1);
+  text-shadow: none;
+}
+
 html {
   text-size-adjust: 100%;
   -webkit-background-size: cover;
