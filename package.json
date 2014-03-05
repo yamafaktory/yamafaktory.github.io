@@ -1,0 +1,18 @@
+{
+  "name": "Davy-Duperron-Resume",
+  "description": "A résumé using the Polymer framework",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "bower": "*",
+    "gulp": "*",
+    "gulp-imagemin": "*",
+    "gulp-myth": "*",
+    "gulp-nodemon": "*",
+    "gulp-svgmin": "*",
+    "gulp-vulcanize": "*",
+    "koa": "*",
+    "koa-static": "*",
+    "myth": "*"
+  }
+}

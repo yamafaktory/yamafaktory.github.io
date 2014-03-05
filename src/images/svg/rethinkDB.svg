@@ -42,7 +42,7 @@
      inkscape:window-x="443"
      inkscape:window-y="156"
      inkscape:window-maximized="0"
-     inkscape:current-layer="logo" /><g
+     inkscape:current-layer="text3873" /><g
      display="none"
      id="g65"
      style="display:none"
@@ -425,8 +425,7 @@
        style="font-size:210px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Source Code Pro for Powerline;-inkscape-font-specification:Source Code Pro for Powerline Bold"
        id="text3873"
        transform="translate(-26.249999,7.8749997e-7)"><path
-         d="m 245.7,183.33 45.36,0 c 49.13995,0 74.97,13.86005 74.97,54.18 0,40.31996 -25.83005,61.11 -74.97,61.11 l -45.36,0 0,-115.29 M 529.41,520.38 384.3,355.95 c 43.46995,-19.52998 73.08,-57.96006 73.08,-118.44 0,-97.6499 -71.82009,-127.89 -158.76,-127.89 l -145.53,0 0,410.76 92.61,0 0,-148.05 48.51,0 131.25,148.05"
          style="font-size:630px;fill:#ffffff;fill-opacity:1;font-family:Source Code Pro for Powerline;-inkscape-font-specification:Source Code Pro for Powerline Bold"
+         d="m 245.7,183.33 c 31.22101,1.13617 63.75369,-3.93528 93.53921,7.70713 28.20321,11.22572 31.93422,48.01725 21.98703,73.03129 -12.00106,29.33462 -47.47505,35.69892 -75.73706,34.55158 -13.26306,0 -26.52612,0 -39.78918,0 0,-38.43 0,-76.86 0,-115.29 z M 529.41,520.38 C 481.04,465.57 432.67,410.76 384.3,355.95 c 41.12665,-16.8318 69.42661,-57.96591 72.31224,-102.00881 4.69081,-43.12306 -7.75547,-92.18251 -46.00977,-116.9949 -43.75619,-29.46452 -98.16556,-27.53173 -148.74989,-27.32629 -36.2542,0 -72.50839,0 -108.76258,0 0,136.92 0,273.84 0,410.76 30.87,0 61.74,0 92.61,0 0,-49.35 0,-98.7 0,-148.05 16.17,0 32.34,0 48.51,0 43.75,49.35 87.5,98.7 131.25,148.05"
          id="path3878"
-         inkscape:connector-curvature="0"
-         sodipodi:nodetypes="csssccccsscccccc" /></g></g></svg>
+         inkscape:connector-curvature="0" /></g></g></svg>

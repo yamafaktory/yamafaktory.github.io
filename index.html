@@ -1,17 +1,177 @@
 <html>
-  <head>
-    <title>Davy Duperron - full stack developer</title>
-    <meta charset="utf8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="dfgdfg">
-    <meta name="author" content="Davy Duperron">
-    <script src="bower_components/platform/platform.js"></script>
-    <link rel="import" href="bower_components/polymer/polymer.html">
-    <link rel="import" href="my-resume.html">
-    <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Open+Sans:700' rel='stylesheet' type='text/css'>
-    <link href="style.css" rel="stylesheet">
-  </head>
-  <body unresolved>
-    <my-resume></my-resume>
-  </body>
+  <head><title>Davy Duperron - full stack developer</title><meta charset="utf8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Davy Duperron&apos;s r&#xE9;sum&#xE9;"><meta name="author" content="Davy Duperron"><script src="bower_components/platform/platform.js"></script><link href="http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Open+Sans:700" rel="stylesheet" type="text/css"><link href="build/css/style.css" rel="stylesheet"></head>
+  <body unresolved=""><polymer-element name="polymer-body" extends="body" assetpath="bower_components/polymer/">
+
+  <script>document.addEventListener("polymer-ready",function(){Polymer("polymer-body",Platform.mixin({created:function(){this.template=document.createElement("template");var body=wrap(document).body;var c$=body.childNodes.array();for(var i=0,c;c=c$[i];i++){if(c.localName!=="script"){this.template.content.appendChild(c)}}window.model=this},parseDeclaration:function(elementElement){this.lightFromTemplate(this.template)}},window.model))});</script>
+
+</polymer-element><script src="bower_components/polymer/polymer.js"></script><polymer-element name="polymer-media-query" attributes="query queryMatches" assetpath="bower_components/polymer-media-query/">
+  <template>
+    <style>:host{display:none}</style>
+  </template>
+  <script>Polymer("polymer-media-query",{queryMatches:false,query:"",ready:function(){this._mqHandler=this.queryHandler.bind(this);this._mq=null},queryChanged:function(){if(this._mq){this._mq.removeListener(this._mqHandler)}var query=this.query;if(query[0]!=="("){query="("+this.query+")"}this._mq=window.matchMedia(query);this._mq.addListener(this._mqHandler);this.queryHandler(this._mq)},queryHandler:function(mq){this.queryMatches=mq.matches;this.asyncFire("polymer-mediachange",mq)}});</script>
+</polymer-element><polymer-element name="polymer-flex-layout" attributes="vertical align justify isContainer" assetpath="bower_components/polymer-flex-layout/">
+  <template>
+    <style polymer-scope="controller">.flexbox,[flexbox],[h-flexbox],[v-flexbox]{display:-webkit-box!important;display:-ms-flexbox!important;display:-moz-flex!important;display:-webkit-flex!important;display:flex!important}.flexbox.row,[flexbox],[h-flexbox]{-webkit-box-orient:horizontal;-ms-flex-direction:row;-moz-flex-direction:row;-webkit-flex-direction:row;flex-direction:row}.flexbox.column,[v-flexbox]{-webkit-box-orient:vertical;-ms-flex-direction:column;-moz-flex-direction:column;-webkit-flex-direction:column;flex-direction:column}.flex,[fit],[flex]{-webkit-box-flex:1;-ms-flex:1;-moz-flex:1;-webkit-flex:1;flex:1}::-webkit-distributed(.flex),::-webkit-distributed([fit]),::-webkit-distributed([flex]){-webkit-box-flex:1;-ms-flex:1;-moz-flex:1;-webkit-flex:1;flex:1}.flexbox.align-start{-webkit-box-align:start;-ms-flex-align:start;-moz-align-items:flex-start;-webkit-align-items:flex-start;align-items:flex-start}.flexbox.align-end{-webkit-box-align:end;-ms-flex-align:end;-moz-align-items:flex-end;-webkit-align-items:flex-end;align-items:flex-end}.flexbox.align-center{-webkit-box-align:center;-ms-flex-align:center;-moz-align-items:center;-webkit-align-items:center;align-items:center}.flexbox.justify-start{-webkit-box-pack:start;-ms-flex-pack:start;-moz-justify-content:flex-start;-webkit-justify-content:flex-start;justify-content:flex-start}.flexbox.justify-end{-webkit-box-pack:end;-ms-flex-pack:end;-moz-justify-content:flex-end;-webkit-justify-content:flex-end;justify-content:flex-end}.flexbox.justify-center{-webkit-box-pack:center;-ms-flex-pack:center;-moz-justify-content:center;-webkit-justify-content:center;justify-content:center}.flexbox.justify-between{-webkit-box-pack:justify;-ms-flex-pack:justify;-moz-justify-content:space-between;-webkit-justify-content:space-between;justify-content:space-between}:host(.flexbox:host,[flexbox]:host,[h-flexbox]:host,[v-flexbox]:host){display:-webkit-box!important;display:-ms-flexbox!important;display:-moz-flex!important;display:-webkit-flex!important;display:flex!important}:host(.flexbox.row:host,[flexbox]:host,[h-flexbox]:host){-webkit-box-orient:horizontal;-ms-flex-direction:row;-moz-flex-direction:row;-webkit-flex-direction:row;flex-direction:row}:host(.flexbox.column:host,[v-flexbox]:host){-webkit-box-orient:vertical;-ms-flex-direction:column;-moz-flex-direction:column;-webkit-flex-direction:column;flex-direction:column}:host(.flexbox.align-start:host){-webkit-box-align:start;-ms-flex-align:start;-moz-align-items:flex-start;-webkit-align-items:flex-start;align-items:flex-start}:host(.flexbox.align-end:host){-webkit-box-align:end;-ms-flex-align:end;-moz-align-items:flex-end;-webkit-align-items:flex-end;align-items:flex-end}:host(.flexbox.align-center:host){-webkit-box-align:center;-ms-flex-align:center;-moz-align-items:center;-webkit-align-items:center;align-items:center}:host(.flexbox.justify-start:host){-webkit-box-pack:start;-ms-flex-pack:start;-moz-justify-content:flex-start;-webkit-justify-content:flex-start;justify-content:flex-start}:host(.flexbox.justify-end:host){-webkit-box-pack:end;-ms-flex-pack:end;-moz-justify-content:flex-end;-webkit-justify-content:flex-end;justify-content:flex-end}:host(.flexbox.justify-center:host){-webkit-box-pack:center;-ms-flex-pack:center;-moz-justify-content:center;-webkit-justify-content:center;justify-content:center}:host(.flexbox.justify-between:host){-webkit-box-pack:justify;-ms-flex-pack:justify;-moz-justify-content:space-between;-webkit-justify-content:space-between;justify-content:space-between}</style>
+    <style>.flexbox,[flexbox],[h-flexbox],[v-flexbox]{display:-webkit-box!important;display:-ms-flexbox!important;display:-moz-flex!important;display:-webkit-flex!important;display:flex!important}.flexbox.row,[flexbox],[h-flexbox]{-webkit-box-orient:horizontal;-ms-flex-direction:row;-moz-flex-direction:row;-webkit-flex-direction:row;flex-direction:row}.flexbox.column,[v-flexbox]{-webkit-box-orient:vertical;-ms-flex-direction:column;-moz-flex-direction:column;-webkit-flex-direction:column;flex-direction:column}.flex,[fit],[flex]{-webkit-box-flex:1;-ms-flex:1;-moz-flex:1;-webkit-flex:1;flex:1}::-webkit-distributed(.flex),::-webkit-distributed([fit]),::-webkit-distributed([flex]){-webkit-box-flex:1;-ms-flex:1;-moz-flex:1;-webkit-flex:1;flex:1}.flexbox.align-start{-webkit-box-align:start;-ms-flex-align:start;-moz-align-items:flex-start;-webkit-align-items:flex-start;align-items:flex-start}.flexbox.align-end{-webkit-box-align:end;-ms-flex-align:end;-moz-align-items:flex-end;-webkit-align-items:flex-end;align-items:flex-end}.flexbox.align-center{-webkit-box-align:center;-ms-flex-align:center;-moz-align-items:center;-webkit-align-items:center;align-items:center}.flexbox.justify-start{-webkit-box-pack:start;-ms-flex-pack:start;-moz-justify-content:flex-start;-webkit-justify-content:flex-start;justify-content:flex-start}.flexbox.justify-end{-webkit-box-pack:end;-ms-flex-pack:end;-moz-justify-content:flex-end;-webkit-justify-content:flex-end;justify-content:flex-end}.flexbox.justify-center{-webkit-box-pack:center;-ms-flex-pack:center;-moz-justify-content:center;-webkit-justify-content:center;justify-content:center}.flexbox.justify-between{-webkit-box-pack:justify;-ms-flex-pack:justify;-moz-justify-content:space-between;-webkit-justify-content:space-between;justify-content:space-between}:host(.flexbox:host,[flexbox]:host,[h-flexbox]:host,[v-flexbox]:host){display:-webkit-box!important;display:-ms-flexbox!important;display:-moz-flex!important;display:-webkit-flex!important;display:flex!important}:host(.flexbox.row:host,[flexbox]:host,[h-flexbox]:host){-webkit-box-orient:horizontal;-ms-flex-direction:row;-moz-flex-direction:row;-webkit-flex-direction:row;flex-direction:row}:host(.flexbox.column:host,[v-flexbox]:host){-webkit-box-orient:vertical;-ms-flex-direction:column;-moz-flex-direction:column;-webkit-flex-direction:column;flex-direction:column}:host(.flexbox.align-start:host){-webkit-box-align:start;-ms-flex-align:start;-moz-align-items:flex-start;-webkit-align-items:flex-start;align-items:flex-start}:host(.flexbox.align-end:host){-webkit-box-align:end;-ms-flex-align:end;-moz-align-items:flex-end;-webkit-align-items:flex-end;align-items:flex-end}:host(.flexbox.align-center:host){-webkit-box-align:center;-ms-flex-align:center;-moz-align-items:center;-webkit-align-items:center;align-items:center}:host(.flexbox.justify-start:host){-webkit-box-pack:start;-ms-flex-pack:start;-moz-justify-content:flex-start;-webkit-justify-content:flex-start;justify-content:flex-start}:host(.flexbox.justify-end:host){-webkit-box-pack:end;-ms-flex-pack:end;-moz-justify-content:flex-end;-webkit-justify-content:flex-end;justify-content:flex-end}:host(.flexbox.justify-center:host){-webkit-box-pack:center;-ms-flex-pack:center;-moz-justify-content:center;-webkit-justify-content:center;justify-content:center}:host(.flexbox.justify-between:host){-webkit-box-pack:justify;-ms-flex-pack:justify;-moz-justify-content:space-between;-webkit-justify-content:space-between;justify-content:space-between}</style>
+    <content></content>
+  </template>
+  <script>Polymer("polymer-flex-layout",{vertical:false,isContainer:false,layoutContainer:null,enteredView:function(){this.installControllerStyles();this.layoutContainer=this.isContainer?this:this.parentNode.host||this.parentNode;this.verticalChanged();this.alignChanged();this.justifyChanged()},leftView:function(){this.layoutContainer=null},layoutContainerChanged:function(old){if(old){old.classList.remove("flexbox")}this.style.display=this.layoutContainer===this?"":"none";if(this.layoutContainer){this.layoutContainer.classList.add("flexbox")}},switchContainerClass:function(prefix,old,name){if(this.layoutContainer&&name){this.layoutContainer.classList.switch(prefix+old,prefix+name)}},verticalChanged:function(){if(this.layoutContainer){this.layoutContainer.classList.toggle("column",this.vertical)}},alignChanged:function(old){this.switchContainerClass("align-",old,this.align)},justifyChanged:function(old){this.switchContainerClass("justify-",old,this.justify)}});</script>
+</polymer-element><polymer-element name="a-skill" attributes="type devices" assetpath="src/html/">
+
+  <template>
+
+    <style>a{text-decoration:none}img{margin:30px;width:60px;height:60px;opacity:.9}img.large{margin:60px;width:120px;height:120px}img:hover{opacity:1}h2,p{font-family:"Libre Baskerville",serif}h2{font-size:2rem;margin:3rem 3rem 0}h3{font-family:"Open Sans",sans-serif;font-size:1rem;font-weight:700;color:rgba(255,255,255,.2);text-align:center}p{margin:1rem 3rem 3rem;font-size:1.2rem;line-height:1.8rem}h2.large{font-size:3rem}h3.large{font-size:1.5rem}p.large{font-size:1.4rem;line-height:2.2rem}ul{list-style:none;padding:0;text-align:center}li{display:inline-block;margin:2rem}li.large{margin:3rem}.circle{background:rgba(0,0,0,.05);border-radius:50%;width:120px;height:120px;margin:0 auto}.circle.large{width:240px;height:240px}.prune{background:rgba(42,30,47,.8)}.prune h2{color:rgba(255,255,255,1)}.prune p{color:rgba(255,255,255,.9)}.grey{background:rgba(40,40,40,1)}.grey h2{color:rgba(170,170,170,1)}.grey p{color:rgba(170,170,170,.9)}</style>
+
+    <section class="{{ type.color }}">
+
+      <polymer-flex-layout iscontainer="" vertical="" align="center" justify="center">
+
+        <article>
+
+          <template if="{{ devices.mobile || devices.medium }}">
+            <h2 align="center">{{ type.name }}</h2>
+            <p align="center">{{ type.description }}</p>
+          </template>
+
+          <template if="{{ devices.large || devices.xlarge || devices.xxlarge }}">
+            <h2 align="center" class="large">{{ type.name }}</h2>
+            <p align="center" class="large">{{ type.description }}</p>
+          </template>
+
+        </article>
+
+        <ul>
+
+          <template repeat="{{ tech in type.technologies }}">
+            
+                <template if="{{ devices.mobile || devices.medium }}">
+                  <li>
+                    <a href="{{ tech.url }}">
+                      <div class="circle">
+                        <img src="{{ tech.logo }}">
+                      </div>
+                      <h3>{{ tech.name }}</h3>
+                    </a>
+                  </li>
+                </template>
+
+                <template if="{{ devices.large || devices.xlarge || devices.xxlarge }}">
+                  <li class="large">
+                    <a href="{{ tech.url }}">
+                      <div class="circle large">
+                        <img src="{{ tech.logo }}" class="large">
+                      </div>
+                      <h3 class="large">{{ tech.name }}</h3>
+                    </a>
+                  </li>
+                </template>
+              
+          </template>
+
+        </ul>
+
+      </polymer-flex-layout>
+
+    </section>
+
+  </template>
+
+  <script>Polymer("a-skill",{ready:function(){}});</script>
+
+</polymer-element><polymer-element name="my-resume" assetpath="src/html/">
+
+  <template>
+
+    <style>footer,header,main{width:100%;z-index:2}footer,header{background:rgba(255,255,255,1)}h1,strong{font-family:"Libre Baskerville",serif}strong{font-weight:700}#title{font-size:2rem;font-weight:300;color:rgba(74,74,74,1);margin:0 2rem 2rem}#title.large{font-size:3rem;margin:3rem 3rem 3rem 0}main{background:rgba(255,255,255,1)}a-skill{width:100%}#name{width:100%;position:fixed;z-index:1}#name h1{font-weight:700;color:rgba(255,255,255,.8)}#name strong{color:rgba(255,255,255,.9)}#me{border-radius:50%;width:100px;margin:2rem}#me.large{min-width:200px;min-height:200px;margin:3rem}</style>
+
+    <polymer-media-query query="max-width: 40rem" querymatches="{{ devices.mobile }}"></polymer-media-query>
+    <polymer-media-query query="(min-width: 40.063rem) and (max-width: 64rem)" querymatches="{{ devices.medium }}"></polymer-media-query>
+    <polymer-media-query query="(min-width: 64.063rem) and (max-width: 90rem)" querymatches="{{ devices.large }}"></polymer-media-query>
+    <polymer-media-query query="(min-width: 90.063rem) and (max-width: 120rem)" querymatches="{{ devices.xlarge }}"></polymer-media-query>
+    <polymer-media-query query="min-width: 120.063rem" querymatches="{{ devices.xxlarge }}"></polymer-media-query>
+
+    <template if="{{ devices.mobile }}">
+      <style>header{margin-top:290px}#name h1{font-size:2rem;margin:4rem 4rem 0}#name strong{font-size:3rem}</style>
+    </template>
+
+    <template if="{{ devices.medium }}">
+      <style>header{margin-top:464px}#name h1{font-size:3rem;margin:6rem 6rem 0}#name strong{font-size:4rem}</style>
+    </template>
+
+    <template if="{{ devices.large }}">
+      <style>header{margin-top:653px}#name h1{font-size:4rem;margin:8rem 8rem 0}#name strong{font-size:5rem}</style>
+    </template>
+
+    <template if="{{ devices.xlarge }}">
+      <style>header{margin-top:871px}#name h1{font-size:5rem;margin:10rem 10rem 0}#name strong{font-size:6rem}</style>
+    </template>
+
+    <template if="{{ devices.xxlarge }}">
+      <style>header{margin-top:1161px}#name h1{font-size:6rem;margin:3rem 3rem 0}#name strong{font-size:7rem}</style>
+    </template>
+
+    <div id="name">
+      <polymer-flex-layout iscontainer="" justify="end">
+        <h1 align="right"><strong>Hi!</strong><br>My name is Davy Duperron.</h1>
+      </polymer-flex-layout>
+    </div>
+      
+    <polymer-flex-layout iscontainer="" vertical="" align="center" justify="center">
+
+      <header>
+
+        <template if="{{ devices.mobile || devices.medium }}">
+          <polymer-flex-layout iscontainer="" vertical="" align="center" justify="center">
+            <img src="/build/images/me-mobile.jpg" id="me">
+            <h1 align="center" id="title">
+              I am a full stack developer.<br>
+              I create <strong>quality products</strong> that use web technologies.<br>
+              I am fond of learning everything related to the web and using <strong>bleeding-edge technologies</strong>.
+            </h1>
+          </polymer-flex-layout>
+        </template>
+
+        <template if="{{ devices.large || devices.xlarge || devices.xxlarge }}">
+          <polymer-flex-layout iscontainer="" align="center" justify="center">
+            <img src="/build/images/me-large.jpg" id="me" class="large">
+            <h1 align="start" id="title" class="large">
+              I am a full stack developer.<br>
+              I create <strong>quality products</strong> that use web technologies.<br>
+              I am fond of learning everything related to the web and using <strong>bleeding-edge technologies</strong>.
+            </h1>
+          </polymer-flex-layout>
+        </template>
+
+      </header>
+
+      <main>
+
+        <polymer-flex-layout iscontainer="" vertical="" align="center" justify="center">
+
+        <template repeat="{{ skill in skills }}">
+          <a-skill type="{{ skill }}" devices="{{ devices }}"></a-skill>
+        </template>
+
+        </polymer-flex-layout>
+
+      </main>
+
+      <footer>
+        
+        <polymer-flex-layout iscontainer="" align="center" justify="center">
+
+          <p>fghfgh</p>
+          <p>fghfgh</p>
+          <p>fghfgh</p>
+
+        </polymer-flex-layout>
+
+      </footer>
+
+    </polymer-flex-layout>
+
+  </template>
+  <script>Polymer("my-resume",{ready:function(){this.devices={},this.skills=[{color:"prune",name:"Front-end",description:"For years, I am stuck in love with web technologies (object-oriented & vanilla JavaScript, HTML5, CSS3, canvas, DOM, jQuery, JSON, Polymer, websockets). I have strong fundamentals in the development of complex responsive applications for the Web relying on modern tools (automation with Gulp / Grunt for minifying - concatenating - even JSHint-ing resources, templates, CSS preprocessors). Moreover, I do care about performance and mobile-first web design.",technologies:[{name:"HTML5 & CSS3",url:"http://www.w3.org/TR/html5/",logo:"./build/images/html5.svg"},{name:"JavaScript",url:"https://developer.mozilla.org/en-US/docs/Web/JavaScript",logo:"./build/images/javascript.svg"},{name:"Polymer",url:"http://www.polymer-project.org/",logo:"./build/images/polymer.svg"},{name:"Responsive Design",url:"http://www.polymer-project.org/",logo:"./build/images/responsive.svg"}]},{color:"grey",name:"Back-end",description:"I - git - push code relying on the event-driven architecture of the Node.js platform, using web application frameworks such as Express and Koa. I love NoSQL databases.",technologies:[{name:"Node.js",url:"http://nodejs.org/",logo:"./build/images/node.js.svg"},{name:"MongoDB",url:"http://www.mongodb.org/",logo:"./build/images/mongoDB.svg"},{name:"RethinkDB",url:"http://www.rethinkdb.com/",logo:"./build/images/rethinkDB.svg"}]}]}});</script>
+
+</polymer-element><my-resume></my-resume></body>
 </html>

@@ -21,8 +21,6 @@
 html {
   text-size-adjust: 100%;
   -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
   background-size: cover;
 }
 
@@ -34,7 +32,7 @@ body {
 
 @media only screen and (max-width: 40rem) {
   html {
-    background: url("./img/mountain-mobile.jpg") no-repeat top center fixed;
+    background: url("../images/mountain-mobile.jpg") no-repeat top center fixed;
   }
 }
 
@@ -42,7 +40,7 @@ body {
 
 @media only screen and (min-width: 40.063rem) and (max-width: 64rem) {
   html {
-    background: url("./img/mountain-medium.jpg") no-repeat top center fixed;
+    background: url("../images/mountain-medium.jpg") no-repeat top center fixed;
   }
 }
 
@@ -50,7 +48,7 @@ body {
 
 @media only screen and (min-width: 64.063rem) and (max-width: 90rem) {
   html {
-    background: url("./img/mountain-large.jpg") no-repeat top center fixed;
+    background: url("../images/mountain-large.jpg") no-repeat top center fixed;
   }
 }
 
@@ -58,7 +56,7 @@ body {
 
 @media only screen and (min-width: 90.063rem) and (max-width: 120rem) {
   html {
-    background: url("./img/mountain-xlarge.jpg") no-repeat top center fixed;
+    background: url("../images/mountain-xlarge.jpg") no-repeat top center fixed;
   }
 }
 
@@ -66,6 +64,6 @@ body {
 
 @media only screen and min-width: 120.063rem {
   html {
-    background: url("./img/mountain-xxlarge.jpg") no-repeat top center fixed;
+    background: url("../images/mountain-xxlarge.jpg") no-repeat top center fixed;
   }
 }

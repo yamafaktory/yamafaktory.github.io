@@ -1,6 +1,6 @@
-<link rel="import" href="bower_components/polymer-media-query/polymer-media-query.html">
+<link rel="import" href="../../bower_components/polymer-media-query/polymer-media-query.html">
 
-<link rel="import" href="bower_components/polymer-flex-layout/polymer-flex-layout.html">
+<link rel="import" href="../../bower_components/polymer-flex-layout/polymer-flex-layout.html">
 
 <link rel="import" href="a-skill.html">
 
@@ -193,7 +193,7 @@
 
         <template if="{{ devices.mobile || devices.medium }}">
           <polymer-flex-layout isContainer vertical align="center" justify="center">
-            <img src="./img/me-mobile.jpg" id="me">
+            <img src="/build/images/me-mobile.jpg" id="me">
             <h1 align="center" id="title">
               I am a full stack developer.<br>
               I create <strong>quality products</strong> that use web technologies.<br>
@@ -204,7 +204,7 @@
 
         <template if="{{ devices.large || devices.xlarge || devices.xxlarge }}">
           <polymer-flex-layout isContainer align="center" justify="center">
-            <img src="./img/me-large.jpg" id="me" class="large">
+            <img src="/build/images/me-large.jpg" id="me" class="large">
             <h1 align="start" id="title" class="large">
               I am a full stack developer.<br>
               I create <strong>quality products</strong> that use web technologies.<br>
@@ -253,19 +253,19 @@
             technologies : [
               { name : 'HTML5 & CSS3',
                 url : 'http://www.w3.org/TR/html5/',
-                logo : './img/html5.svg'
+                logo : './build/images/html5.svg'
               },
               { name : 'JavaScript',
                 url : 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
-                logo : './img/javascript.svg'
+                logo : './build/images/javascript.svg'
               },
               { name : 'Polymer',
                 url : 'http://www.polymer-project.org/',
-                logo : './img/polymer.svg'
+                logo : './build/images/polymer.svg'
               },
               { name : 'Responsive Design',
                 url : 'http://www.polymer-project.org/',
-                logo : './img/responsive.svg'
+                logo : './build/images/responsive.svg'
               }
             ]
           },
@@ -275,15 +275,15 @@
             technologies : [
               { name : 'Node.js',
                 url : 'http://nodejs.org/',
-                logo : './img/node.js.svg'
+                logo : './build/images/node.js.svg'
               },
               { name : 'MongoDB',
                 url : 'http://www.mongodb.org/',
-                logo : './img/mongoDB.svg'
+                logo : './build/images/mongoDB.svg'
               },
               { name : 'RethinkDB',
                 url : 'http://www.rethinkdb.com/',
-                logo : './img/rethinkDB.svg'
+                logo : './build/images/rethinkDB.svg'
               }
             ]
           },
