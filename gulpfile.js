@@ -17,6 +17,11 @@ gulp.task('myth', function () {
     .pipe(gulp.dest('./build/css'));
 });
 
+gulp.task('nodemon', function () {
+  nodemon({ script: 'server.js'})
+    .on('start', ['imagemin', 'myth', 'svgmin', 'vulcanize'])
+})
+
 gulp.task('svgmin', function () {
   gulp.src('./src/images/svg/*.svg')
     .pipe(svgmin())
@@ -29,7 +34,4 @@ gulp.task('vulcanize', function () {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('default', function () {
-  nodemon({ script: 'server.js'})
-    .on('start', ['imagemin', 'myth', 'svgmin', 'vulcanize'])
-})
+gulp.task('default', ['nodemon']);

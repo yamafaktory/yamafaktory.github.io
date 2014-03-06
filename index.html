@@ -1,5 +1,5 @@
 <html>
-  <head><title>Davy Duperron - full stack developer</title><meta charset="utf8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Davy Duperron&apos;s r&#xE9;sum&#xE9;"><meta name="author" content="Davy Duperron"><script src="bower_components/platform/platform.js"></script><link href="http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Open+Sans:700" rel="stylesheet" type="text/css"><link href="build/css/style.css" rel="stylesheet"></head>
+  <head><title>Davy Duperron - full stack developer</title><meta charset="utf8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="keywords" content="Davy Duperron, Full Stack, Front End, Back End, Web Development, Web Developer"><meta name="description" content="Davy Duperron is a full stack developer who create quality products that use web technologies."><meta name="author" content="Davy Duperron"><script src="bower_components/platform/platform.js"></script><link href="http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Open+Sans:700" rel="stylesheet" type="text/css"><link href="build/css/style.css" rel="stylesheet"></head>
   <body unresolved=""><polymer-element name="polymer-body" extends="body" assetpath="bower_components/polymer/">
 
   <script>document.addEventListener("polymer-ready",function(){Polymer("polymer-body",Platform.mixin({created:function(){this.template=document.createElement("template");var body=wrap(document).body;var c$=body.childNodes.array();for(var i=0,c;c=c$[i];i++){if(c.localName!=="script"){this.template.content.appendChild(c)}}window.model=this},parseDeclaration:function(elementElement){this.lightFromTemplate(this.template)}},window.model))});</script>
@@ -20,7 +20,7 @@
 
   <template>
 
-    <style>a{text-decoration:none}img{margin:30px;width:60px;height:60px;opacity:.9}img.large{margin:60px;width:120px;height:120px}img:hover{opacity:1}h2,p{font-family:"Libre Baskerville",serif}h2{font-size:2rem;margin:3rem 3rem 0}h3{font-family:"Open Sans",sans-serif;font-size:1rem;font-weight:700;color:rgba(255,255,255,.2);text-align:center}p{margin:1rem 3rem 3rem;font-size:1.2rem;line-height:1.8rem}h2.large{font-size:3rem}h3.large{font-size:1.5rem}p.large{font-size:1.4rem;line-height:2.2rem}ul{list-style:none;padding:0;text-align:center}li{display:inline-block;margin:2rem}li.large{margin:3rem}.circle{background:rgba(0,0,0,.05);border-radius:50%;width:120px;height:120px;margin:0 auto}.circle.large{width:240px;height:240px}.prune{background:rgba(42,30,47,.8)}.prune h2{color:rgba(255,255,255,1)}.prune p{color:rgba(255,255,255,.9)}.grey{background:rgba(40,40,40,1)}.grey h2{color:rgba(170,170,170,1)}.grey p{color:rgba(170,170,170,.9)}</style>
+    <style>a{text-decoration:none}img{margin:30px;width:60px;height:60px;opacity:.9}img.large{margin:60px;width:120px;height:120px}img:hover{opacity:1}h2{font-family:"Libre Baskerville",serif;font-size:2rem;margin:3rem 3rem 1rem}h3{font-family:"Open Sans",sans-serif;font-size:1rem;font-weight:700;text-align:center}p{margin:1rem 3rem 3rem;font-size:1.2rem;line-height:1.8rem}h2.large{font-size:3rem;margin-top:6rem;margin-bottom:2rem}h3.large{font-size:1.5rem}p.large{font-size:1.4rem;line-height:2.2rem}ul{list-style:none;padding:0;text-align:center}li{display:inline-block;margin:2rem}li.large{margin:3rem}.circle{border-radius:50%;width:120px;height:120px;margin:0 auto}.circle.large{width:240px;height:240px}.prune{background:rgba(42,30,47,.8)}.prune h2{color:rgba(255,255,255,1)}.prune h3{color:rgba(255,255,255,.2)}.prune p{color:rgba(255,255,255,.9)}.prune .circle{background:rgba(0,0,0,.05)}.grey{background:rgba(40,40,40,1)}.grey h2{color:rgba(170,170,170,1)}.grey h3{color:rgba(255,255,255,.1)}.grey p{color:rgba(170,170,170,.9)}.grey .circle{background:rgba(255,255,255,.2)}</style>
 
     <section class="{{ type.color }}">
 
@@ -28,44 +28,22 @@
 
         <article>
 
-          <template if="{{ devices.mobile || devices.medium }}">
-            <h2 align="center">{{ type.name }}</h2>
-            <p align="center">{{ type.description }}</p>
-          </template>
-
-          <template if="{{ devices.large || devices.xlarge || devices.xxlarge }}">
-            <h2 align="center" class="large">{{ type.name }}</h2>
-            <p align="center" class="large">{{ type.description }}</p>
-          </template>
+          <h2 align="center" class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ type.name }}</h2>
+          <p align="center" class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ type.description }}</p>
 
         </article>
 
         <ul>
 
           <template repeat="{{ tech in type.technologies }}">
-            
-                <template if="{{ devices.mobile || devices.medium }}">
-                  <li>
-                    <a href="{{ tech.url }}">
-                      <div class="circle">
-                        <img src="{{ tech.logo }}">
-                      </div>
-                      <h3>{{ tech.name }}</h3>
-                    </a>
-                  </li>
-                </template>
-
-                <template if="{{ devices.large || devices.xlarge || devices.xxlarge }}">
-                  <li class="large">
-                    <a href="{{ tech.url }}">
-                      <div class="circle large">
-                        <img src="{{ tech.logo }}" class="large">
-                      </div>
-                      <h3 class="large">{{ tech.name }}</h3>
-                    </a>
-                  </li>
-                </template>
-              
+            <li class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
+              <a href="{{ tech.url }}">
+                <div class="{{ { circle: true, large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
+                  <img src="{{ tech.logo }}" class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
+                </div>
+                <h3 class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ tech.name }}</h3>
+              </a>
+            </li>
           </template>
 
         </ul>
@@ -82,7 +60,7 @@
 
   <template>
 
-    <style>footer,header,main{width:100%;z-index:2}footer,header{background:rgba(255,255,255,1)}h1,strong{font-family:"Libre Baskerville",serif}strong{font-weight:700}#title{font-size:2rem;font-weight:300;color:rgba(74,74,74,1);margin:0 2rem 2rem}#title.large{font-size:3rem;margin:3rem 3rem 3rem 0}main{background:rgba(255,255,255,1)}a-skill{width:100%}#name{width:100%;position:fixed;z-index:1}#name h1{font-weight:700;color:rgba(255,255,255,.8)}#name strong{color:rgba(255,255,255,.9)}#me{border-radius:50%;width:100px;margin:2rem}#me.large{min-width:200px;min-height:200px;margin:3rem}</style>
+    <style>footer,header,main{width:100%;z-index:2}footer,header{background:rgba(255,255,255,1)}h1,p,strong{font-family:"Libre Baskerville",serif}strong{font-weight:700}a{color:rgba(42,30,47,.8)}footer p{margin:6rem 3rem;font-size:1.2rem;line-height:1.8rem;color:rgba(50,50,50,1)}footer p.large{font-size:1.4rem;line-height:2.2rem}#title{font-size:2rem;font-weight:300;color:rgba(74,74,74,1);margin:0 2rem 2rem}#title.large{font-size:3rem;margin:6rem 3rem 6rem 0}main{background:rgba(255,255,255,1)}a-skill{width:100%}#name{width:100%;position:fixed;z-index:1}#name h1{font-weight:700;color:rgba(255,255,255,.8)}#name strong{color:rgba(255,255,255,.9)}#me{border-radius:50%;width:100px;margin:2rem}#me.large{min-width:200px;min-height:200px;margin:3rem}</style>
 
     <polymer-media-query query="max-width: 40rem" querymatches="{{ devices.mobile }}"></polymer-media-query>
     <polymer-media-query query="(min-width: 40.063rem) and (max-width: 64rem)" querymatches="{{ devices.medium }}"></polymer-media-query>
@@ -160,9 +138,7 @@
         
         <polymer-flex-layout iscontainer="" align="center" justify="center">
 
-          <p>fghfgh</p>
-          <p>fghfgh</p>
-          <p>fghfgh</p>
+            <p class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">If you're interested in knowing more about me, follow me on <a href="https://twitter.com/yamafaktory">Twitter</a>. Connect with me on <a href="http://www.linkedin.com/in/davyduperron">LinkedIn</a>. Fork me on <a href="https://github.com/yamafaktory">GitHub</a>.</p>
 
         </polymer-flex-layout>
 
@@ -171,7 +147,7 @@
     </polymer-flex-layout>
 
   </template>
-  <script>Polymer("my-resume",{ready:function(){this.devices={},this.skills=[{color:"prune",name:"Front-end",description:"For years, I am stuck in love with web technologies (object-oriented & vanilla JavaScript, HTML5, CSS3, canvas, DOM, jQuery, JSON, Polymer, websockets). I have strong fundamentals in the development of complex responsive applications for the Web relying on modern tools (automation with Gulp / Grunt for minifying - concatenating - even JSHint-ing resources, templates, CSS preprocessors). Moreover, I do care about performance and mobile-first web design.",technologies:[{name:"HTML5 & CSS3",url:"http://www.w3.org/TR/html5/",logo:"./build/images/html5.svg"},{name:"JavaScript",url:"https://developer.mozilla.org/en-US/docs/Web/JavaScript",logo:"./build/images/javascript.svg"},{name:"Polymer",url:"http://www.polymer-project.org/",logo:"./build/images/polymer.svg"},{name:"Responsive Design",url:"http://www.polymer-project.org/",logo:"./build/images/responsive.svg"}]},{color:"grey",name:"Back-end",description:"I - git - push code relying on the event-driven architecture of the Node.js platform, using web application frameworks such as Express and Koa. I love NoSQL databases.",technologies:[{name:"Node.js",url:"http://nodejs.org/",logo:"./build/images/node.js.svg"},{name:"MongoDB",url:"http://www.mongodb.org/",logo:"./build/images/mongoDB.svg"},{name:"RethinkDB",url:"http://www.rethinkdb.com/",logo:"./build/images/rethinkDB.svg"}]}]}});</script>
+  <script>Polymer("my-resume",{ready:function(){this.devices={},this.skills=[{color:"prune",name:"Front-end",description:"For years, I am stuck in love with web technologies (object-oriented & vanilla JavaScript, HTML5, CSS3, canvas, DOM, jQuery, JSON, Polymer, websockets). I have strong fundamentals in the development of complex responsive applications for the Web relying on modern tools (automation with Gulp / Grunt for minifying - concatenating - even JSHint-ing resources, templates, CSS preprocessors). Moreover, I do care about performance and mobile-first web design.",technologies:[{name:"HTML5 & CSS3",url:"http://www.w3.org/TR/html5/",logo:"./build/images/html5.svg"},{name:"JavaScript",url:"https://developer.mozilla.org/en-US/docs/Web/JavaScript",logo:"./build/images/javascript.svg"},{name:"Polymer",url:"http://www.polymer-project.org/",logo:"./build/images/polymer.svg"},{name:"Responsive Design",url:"http://www.html5rocks.com/en/mobile/responsivedesign/",logo:"./build/images/responsive.svg"}]},{color:"grey",name:"Back-end",description:"I - git - push code relying on the event-driven architecture of the Node.js platform, using web application frameworks such as Express and Koa. I love NoSQL databases.",technologies:[{name:"Node.js",url:"http://nodejs.org/",logo:"./build/images/node.js.svg"},{name:"MongoDB",url:"http://www.mongodb.org/",logo:"./build/images/mongoDB.svg"},{name:"RethinkDB",url:"http://www.rethinkdb.com/",logo:"./build/images/rethinkDB.svg"},{name:"GitHub",url:"https://github.com/",logo:"./build/images/github.svg"}]}]}});</script>
 
 </polymer-element><my-resume></my-resume></body>
 </html>

@@ -26,12 +26,29 @@
       }
 
       h1,
+      p,
       strong {
         font-family: "Libre Baskerville", serif;
       }
 
       strong {
         font-weight: 700;
+      }
+
+      a {
+        color: rgba(42, 30, 47, .8);
+      }
+
+      footer p {
+        margin: 6rem 3rem 6rem 3rem;
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+        color: rgba(50, 50, 50, 1);
+      }
+
+      footer p.large {
+        font-size: 1.4rem;
+        line-height: 2.2rem;
       }
 
       #title {
@@ -43,7 +60,7 @@
 
       #title.large {
         font-size: 3rem;
-        margin: 3rem 3rem 3rem 0;
+        margin: 6rem 3rem 6rem 0;
       }
 
       main {
@@ -231,9 +248,7 @@
         
         <polymer-flex-layout isContainer align="center" justify="center">
 
-          <p>fghfgh</p>
-          <p>fghfgh</p>
-          <p>fghfgh</p>
+            <p class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">If you're interested in knowing more about me, follow me on <a href="https://twitter.com/yamafaktory">Twitter</a>. Connect with me on <a href="http://www.linkedin.com/in/davyduperron">LinkedIn</a>. Fork me on <a href="https://github.com/yamafaktory">GitHub</a>.</p>
 
         </polymer-flex-layout>
 
@@ -264,7 +279,7 @@
                 logo : './build/images/polymer.svg'
               },
               { name : 'Responsive Design',
-                url : 'http://www.polymer-project.org/',
+                url : 'http://www.html5rocks.com/en/mobile/responsivedesign/',
                 logo : './build/images/responsive.svg'
               }
             ]
@@ -284,7 +299,11 @@
               { name : 'RethinkDB',
                 url : 'http://www.rethinkdb.com/',
                 logo : './build/images/rethinkDB.svg'
-              }
+              },
+              { name : 'GitHub',
+                url : 'https://github.com/',
+                logo : './build/images/github.svg'
+              },
             ]
           },
         ];
