@@ -12,17 +12,12 @@
         margin: 30px;
         width: 60px;
         height: 60px;
-        opacity: .9;
       }
 
       img.large {
         margin: 60px;
         width: 120px;
         height: 120px;
-      }
-
-      img:hover {
-        opacity: 1;
       }
 
       h2 {
@@ -145,14 +140,16 @@
         <ul>
 
           <template repeat="{{ tech in type.technologies }}">
-            <li class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
-              <a href="{{ tech.url }}">
+            <polymer-flip axis="y" on-click="{{ animate }}">
+              <li class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
+                <a href="{{ tech.url }}">
                 <div class="{{ { circle: true, large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
                   <img src="{{ tech.logo }}" class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
                 </div>
                 <h3 class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ tech.name }}</h3>
-              </a>
-            </li>
+                </a>
+              </li>
+            </polymer-flip>
           </template>
 
         </ul>
@@ -165,8 +162,12 @@
 
   <script>
     Polymer('a-skill', {
+      animate : function (event, detail, sender) {
+        var animation = sender;
+        animation.target = sender.impl.querySelector('.circle');
+        animation.play();
+      },
       ready : function () {
-
       }
     });
   </script>

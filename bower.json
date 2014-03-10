@@ -2,12 +2,19 @@
   "name": "my-resume",
   "version": "0.1.0",
   "authors": [
-    "yamafaktory <yamafaktory@gmail.com>"
+    {
+      "name": "Davy Duperron",
+      "email": "yamafaktory@gmail.com",
+      " homepage": "http://github.com/yamafaktory"
+    }
   ],
   "description": "It's my resume, hire me!",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "polymer": "~0.2.0"
+    "polymer": "~0.2.1",
+    "polymer-flex-layout": "Polymer/polymer-flex-layout#~0.2.1",
+    "polymer-media-query": "Polymer/polymer-media-query#~0.2.1",
+    "polymer-animation": "Polymer/polymer-animation#~0.2.1"
   }
 }
