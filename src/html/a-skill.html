@@ -140,10 +140,10 @@
         <ul>
 
           <template repeat="{{ tech in type.technologies }}">
-            <polymer-flip axis="y" on-click="{{ animate }}">
+            <polymer-flip axis="y" on-tap="{{ animate }}">
               <li class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
                 <a href="{{ tech.url }}">
-                <div class="{{ { circle: true, large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
+                <div class="{{ { circle: true, large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}" id="target">
                   <img src="{{ tech.logo }}" class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
                 </div>
                 <h3 class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ tech.name }}</h3>
@@ -164,7 +164,7 @@
     Polymer('a-skill', {
       animate : function (event, detail, sender) {
         var animation = sender;
-        animation.target = sender.impl.querySelector('.circle');
+        animation.target = sender.querySelector('#target');
         animation.play();
       }
     });

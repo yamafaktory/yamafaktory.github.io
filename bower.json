@@ -1,6 +1,6 @@
 {
   "name": "my-resume",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "authors": [
     {
       "name": "Davy Duperron",
@@ -13,8 +13,8 @@
   "private": true,
   "dependencies": {
     "polymer": "~0.2.1",
-    "polymer-flex-layout": "Polymer/polymer-flex-layout#~0.2.1",
-    "polymer-media-query": "Polymer/polymer-media-query#~0.2.1",
-    "polymer-animation": "Polymer/polymer-animation#~0.2.1"
+    "polymer-flex-layout": "Polymer/polymer-flex-layout#~0.2.2",
+    "polymer-media-query": "Polymer/polymer-media-query#~0.2.2",
+    "polymer-animation": "Polymer/polymer-animation#~0.2.2"
   }
 }

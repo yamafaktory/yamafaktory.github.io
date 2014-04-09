@@ -55,6 +55,7 @@ function createDummyElement() {
 
 var features = detectFeatures();
 var constructorToken = {};
+var deprecationsSilenced = {};
 
 var createObject = function(proto, obj) {
   var newObject = Object.create(proto);
@@ -67,6 +68,24 @@ var createObject = function(proto, obj) {
 
 var abstractMethod = function() {
   throw 'Abstract method not implemented.';
+};
+
+var deprecated = function(name, deprecationDate, advice) {
+  if (deprecationsSilenced[name]) {
+    return;
+  }
+  var today = new Date();
+  var cutoffDate = new Date(deprecationDate);
+  cutoffDate.setMonth(cutoffDate.getMonth() + 3); // 3 months grace period
+
+  if (today < cutoffDate) {
+    console.warn('Web Animations: ' + name +
+        ' is deprecated and will stop working on ' +
+        cutoffDate.toDateString() + '. ' + advice);
+    deprecationsSilenced[name] = true;
+  } else {
+    throw new Error(name + ' is no longer supported. ' + advice);
+  }
 };
 
 var IndexSizeError = function(message) {
@@ -193,7 +212,7 @@ var isDefinedAndNotNull = function(val) {
 
 
 /** @constructor */
-var Timeline = function(token) {
+var AnimationTimeline = function(token) {
   if (token !== constructorToken) {
     throw new TypeError('Illegal constructor');
   }
@@ -204,7 +223,7 @@ var Timeline = function(token) {
   }
 };
 
-Timeline.prototype = {
+AnimationTimeline.prototype = {
   get currentTime() {
     if (this._startTime === undefined) {
       this._startTime = documentTimeZeroAsClockTime;
@@ -220,7 +239,7 @@ Timeline.prototype = {
     return this.currentTime || 0;
   },
   play: function(source) {
-    return new Player(constructorToken, source, this);
+    return new AnimationPlayer(constructorToken, source, this);
   },
   getCurrentPlayers: function() {
     return PLAYERS.filter(function(player) {
@@ -242,7 +261,7 @@ Timeline.prototype = {
   }
 };
 
-// TODO: Remove dead Players from here?
+// TODO: Remove dead players from here?
 var PLAYERS = [];
 var playersAreSorted = false;
 var playerSequenceNumber = 0;
@@ -250,7 +269,7 @@ var playerSequenceNumber = 0;
 
 
 /** @constructor */
-var Player = function(token, source, timeline) {
+var AnimationPlayer = function(token, source, timeline) {
   if (token !== constructorToken) {
     throw new TypeError('Illegal constructor');
   }
@@ -279,7 +298,7 @@ var Player = function(token, source, timeline) {
   }
 };
 
-Player.prototype = {
+AnimationPlayer.prototype = {
   set source(source) {
     enterModifyCurrentAnimationState();
     try {
@@ -644,8 +663,8 @@ TimedItem.prototype = {
         this.remove();
       }
       this._parent = parent;
-      // In the case of a SeqGroup parent, _startTime will be updated by
-      // TimingGroup.splice().
+      // In the case of a AnimationSequence parent, _startTime will be updated
+      // by TimingGroup.splice().
       if (this.parent === null || this.parent.type !== 'seq') {
         this._startTime =
             this._stashedStartTime === undefined ? 0.0 : this._stashedStartTime;
@@ -684,8 +703,8 @@ TimedItem.prototype = {
   },
   // We push time down to children. We could instead have children pull from
   // above, but this is tricky because a TimedItem may use either a parent
-  // TimedItem or an Player. This requires either logic in
-  // TimedItem, or for TimedItem and Player to implement Timeline
+  // TimedItem or an AnimationPlayer. This requires either logic in
+  // TimedItem, or for TimedItem and AnimationPlayer to implement Timeline
   // (or an equivalent), both of which are ugly.
   _updateInheritedTime: function(inheritedTime) {
     this._inheritedTime = inheritedTime;
@@ -1448,8 +1467,8 @@ TimingGroup.prototype = createObject(TimedItem.prototype, {
       children.push(child.clone());
     });
     return this.type === 'par' ?
-        new ParGroup(children, this.specified._dict) :
-        new SeqGroup(children, this.specified._dict);
+        new AnimationGroup(children, this.specified._dict) :
+        new AnimationSequence(children, this.specified._dict);
   },
   clear: function() {
     this._splice(0, this._children.length);
@@ -1563,20 +1582,20 @@ TimingGroup.prototype = createObject(TimedItem.prototype, {
 
 
 /** @constructor */
-var ParGroup = function(children, timing, parent) {
+var AnimationGroup = function(children, timing, parent) {
   TimingGroup.call(this, constructorToken, 'par', children, timing, parent);
 };
 
-ParGroup.prototype = Object.create(TimingGroup.prototype);
+AnimationGroup.prototype = Object.create(TimingGroup.prototype);
 
 
 
 /** @constructor */
-var SeqGroup = function(children, timing, parent) {
+var AnimationSequence = function(children, timing, parent) {
   TimingGroup.call(this, constructorToken, 'seq', children, timing, parent);
 };
 
-SeqGroup.prototype = Object.create(TimingGroup.prototype);
+AnimationSequence.prototype = Object.create(TimingGroup.prototype);
 
 
 
@@ -1604,7 +1623,8 @@ var MediaReference = function(mediaElement, timing, parent, delta) {
   this._media.loop = false;
 
   // If the media element has a media controller, we detach it. This mirrors the
-  // behaviour when re-parenting a TimedItem, or attaching one to a Player.
+  // behaviour when re-parenting a TimedItem, or attaching one to an
+  // AnimationPlayer.
   // TODO: It would be neater to assign to MediaElement.controller, but this was
   // broken in Chrome until recently. See crbug.com/226270.
   this._media.mediaGroup = '';
@@ -1668,8 +1688,8 @@ MediaReference.prototype = createObject(TimedItem.prototype, {
       this._media.currentTime = time * this._media.defaultPlaybackRate;
     }
   },
-  // This is called by the polyfill on each tick when our Player's tree is
-  // active.
+  // This is called by the polyfill on each tick when our AnimationPlayer's tree
+  // is active.
   _updateInheritedTime: function(inheritedTime) {
     this._inheritedTime = inheritedTime;
     this._updateTimeMarkers();
@@ -1728,10 +1748,10 @@ MediaReference.prototype = createObject(TimedItem.prototype, {
       this._ensurePlaying();
     }
 
-    // Seek if required. This could be due to our Player being seeked, or video
-    // slippage. We need to handle the fact that the video may not play at
-    // exactly the right speed. There's also a variable delay when the video is
-    // first played.
+    // Seek if required. This could be due to our AnimationPlayer being seeked,
+    // or video slippage. We need to handle the fact that the video may not play
+    // at exactly the right speed. There's also a variable delay when the video
+    // is first played.
     // TODO: What's the right value for this delta?
     var delta = isDefinedAndNotNull(this._delta) ? this._delta :
         0.2 * Math.abs(this._media.playbackRate);
@@ -2021,7 +2041,8 @@ var expandShorthand = function(property, value, result) {
 var normalizeKeyframeDictionary = function(properties) {
   var result = {
     offset: null,
-    composite: null
+    composite: null,
+    easing: presetTimingFunctions.linear
   };
   var animationProperties = [];
   for (var property in properties) {
@@ -2035,6 +2056,8 @@ var normalizeKeyframeDictionary = function(properties) {
           properties.composite === 'replace') {
         result.composite = properties.composite;
       }
+    } else if (property === 'easing') {
+      result.easing = TimingFunction.createFromString(properties.easing);
     } else {
       // TODO: Check whether this is a supported property.
       animationProperties.push(property);
@@ -2201,6 +2224,9 @@ KeyframeEffect.prototype = createObject(AnimationEffect.prototype, {
     }
     var intervalDistance = (timeFraction - startKeyframe.offset) /
         (endKeyframe.offset - startKeyframe.offset);
+    if (startKeyframe.easing) {
+      intervalDistance = startKeyframe.easing.scaleTime(intervalDistance);
+    }
     return new BlendedCompositableValue(
         new AddReplaceCompositableValue(startKeyframe.rawValue(),
             this._compositeForKeyframe(startKeyframe)),
@@ -2222,8 +2248,8 @@ KeyframeEffect.prototype = createObject(AnimationEffect.prototype, {
         }
         var frame = distributedFrames[i];
         this._cachedPropertySpecificKeyframes[property].push(
-            new PropertySpecificKeyframe(frame.offset,
-                frame.composite, property, frame.cssValues[property]));
+            new PropertySpecificKeyframe(frame.offset, frame.composite,
+                frame.easing, property, frame.cssValues[property]));
       }
     }
 
@@ -2236,12 +2262,12 @@ KeyframeEffect.prototype = createObject(AnimationEffect.prototype, {
       // Add synthetic keyframes at offsets of 0 and 1 if required.
       if (frames[0].offset !== 0.0) {
         var keyframe = new PropertySpecificKeyframe(0.0, 'add',
-            property, cssNeutralValue);
+            presetTimingFunctions.linear, property, cssNeutralValue);
         frames.unshift(keyframe);
       }
       if (frames[frames.length - 1].offset !== 1.0) {
         var keyframe = new PropertySpecificKeyframe(1.0, 'add',
-            property, cssNeutralValue);
+            presetTimingFunctions.linear, property, cssNeutralValue);
         frames.push(keyframe);
       }
       ASSERT_ENABLED && assert(
@@ -2387,7 +2413,7 @@ KeyframeEffect.prototype = createObject(AnimationEffect.prototype, {
  *
  * @constructor
  */
-var KeyframeInternal = function(offset, composite) {
+var KeyframeInternal = function(offset, composite, easing) {
   ASSERT_ENABLED && assert(
       typeof offset === 'number' || offset === null,
       'Invalid offset value');
@@ -2396,6 +2422,7 @@ var KeyframeInternal = function(offset, composite) {
       'Invalid composite value');
   this.offset = offset;
   this.composite = composite;
+  this.easing = easing;
   this.cssValues = {};
 };
 
@@ -2420,9 +2447,12 @@ KeyframeInternal.createFromNormalizedProperties = function(properties) {
   ASSERT_ENABLED && assert(
       isDefinedAndNotNull(properties) && typeof properties === 'object',
       'Properties must be an object');
-  var keyframe = new KeyframeInternal(properties.offset, properties.composite);
+  var keyframe = new KeyframeInternal(properties.offset, properties.composite,
+      properties.easing);
   for (var candidate in properties) {
-    if (candidate !== 'offset' && candidate !== 'composite') {
+    if (candidate !== 'offset' &&
+        candidate !== 'composite' &&
+        candidate !== 'easing') {
       keyframe.addPropertyValuePair(candidate, properties[candidate]);
     }
   }
@@ -2432,9 +2462,11 @@ KeyframeInternal.createFromNormalizedProperties = function(properties) {
 
 
 /** @constructor */
-var PropertySpecificKeyframe = function(offset, composite, property, cssValue) {
+var PropertySpecificKeyframe = function(offset, composite, easing, property,
+    cssValue) {
   this.offset = offset;
   this.composite = composite;
+  this.easing = easing;
   this.property = property;
   this.cssValue = cssValue;
   // Calculated lazily
@@ -5202,8 +5234,8 @@ var ticker = function(rafTime, isRepeat) {
   // Clear any modifications to getComputedStyle.
   ensureOriginalGetComputedStyle();
 
-  // Get animations for this sample. We order by Player then by DFS order within
-  // each Player's tree.
+  // Get animations for this sample. We order by AnimationPlayer then by DFS
+  // order within each AnimationPlayer's tree.
   if (!playersAreSorted) {
     PLAYERS.sort(playerSortFunction);
     playersAreSorted = true;
@@ -5269,7 +5301,7 @@ var maybeRestartAnimation = function() {
   rafScheduled = true;
 };
 
-var DOCUMENT_TIMELINE = new Timeline(constructorToken);
+var DOCUMENT_TIMELINE = new AnimationTimeline(constructorToken);
 // attempt to override native implementation
 try {
   Object.defineProperty(document, 'timeline', {
@@ -5285,7 +5317,7 @@ try {
 window.Element.prototype.animate = function(effect, timing) {
   var anim = new Animation(this, effect, timing);
   DOCUMENT_TIMELINE.play(anim);
-  return anim;
+  return anim.player;
 };
 window.Element.prototype.getCurrentPlayers = function() {
   return PLAYERS.filter((function(player) {
@@ -5304,27 +5336,38 @@ window.Element.prototype.getCurrentAnimations = function() {
 
 window.Animation = Animation;
 window.AnimationEffect = AnimationEffect;
+window.AnimationGroup = AnimationGroup;
+window.AnimationPlayer = AnimationPlayer;
+window.AnimationSequence = AnimationSequence;
+window.AnimationTimeline = AnimationTimeline;
 window.KeyframeEffect = KeyframeEffect;
 window.MediaReference = MediaReference;
-window.ParGroup = ParGroup;
 window.MotionPathEffect = MotionPathEffect;
-window.Player = Player;
 window.PseudoElementReference = PseudoElementReference;
-window.SeqGroup = SeqGroup;
 window.TimedItem = TimedItem;
 window.TimedItemList = TimedItemList;
 window.Timing = Timing;
-window.Timeline = Timeline;
 window.TimingEvent = TimingEvent;
 window.TimingGroup = TimingGroup;
 
 window._WebAnimationsTestingUtilities = {
   _constructorToken: constructorToken,
+  _deprecated: deprecated,
   _positionListType: positionListType,
   _hsl2rgb: hsl2rgb,
   _types: propertyTypes,
   _knownPlayers: PLAYERS,
   _pacedTimingFunction: PacedTimingFunction
 };
+
+// Timeline is deprecated
+Object.defineProperty(window, 'Timeline', {
+  get: function() {
+    deprecated('Timeline', '2014-04-08',
+        'Please use AnimationTimeline instead.');
+    return AnimationTimeline;
+  },
+  configurable: true
+});
 
 })();
