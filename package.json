@@ -1,7 +1,7 @@
 {
   "name": "Davy-Duperron-Resume",
-  "description": "A résumé using the Polymer framework",
-  "version": "0.1.1",
+  "description": "My résumé using the Polymer library",
+  "version": "0.1.2",
   "private": true,
   "devDependencies": {
     "bower": "*",

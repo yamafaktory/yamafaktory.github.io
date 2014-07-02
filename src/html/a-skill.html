@@ -22,9 +22,6 @@
 
       h2 {
         font-family: "Libre Baskerville", serif;
-      }
-
-      h2 {
         font-size: 2rem;
         margin: 3rem 3rem 1rem 3rem;
       }
@@ -57,6 +54,10 @@
         line-height: 2.2rem;
       }
 
+      h2, p {
+        text-align: center;
+      }
+
       ul {
         list-style: none;
         padding: 0;
@@ -66,6 +67,10 @@
       li {
         display: inline-block;
         margin: 2rem;
+      }
+
+      li:hover {
+        cursor: pointer;
       }
 
       li.large {
@@ -126,48 +131,48 @@
       
     </style>
 
-    <section class="{{ type.color }}">
+    <animate-pulse url="{{ url }}" id="pulse"></animate-pulse>
 
-      <polymer-flex-layout isContainer vertical align="center" justify="center">
+    <section vertical center-justified layout center class="{{ type.color }}">
 
-        <article>
+      <article>
+        <h2 class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ type.name }}</h2>
+        <p class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ type.description }}</p>
+      </article>
 
-          <h2 align="center" class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ type.name }}</h2>
-          <p align="center" class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ type.description }}</p>
-
-        </article>
-
-        <ul>
-
-          <template repeat="{{ tech in type.technologies }}">
-            <polymer-flip axis="y" on-tap="{{ animate }}">
-              <li class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
-                <a href="{{ tech.url }}">
-                <div class="{{ { circle: true, large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}" id="target">
-                  <img src="{{ tech.logo }}" class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
-                </div>
-                <h3 class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ tech.name }}</h3>
-                </a>
-              </li>
-            </polymer-flip>
-          </template>
-
-        </ul>
-
-      </polymer-flex-layout>
+      <ul>
+        <template repeat="{{ tech in type.technologies }}">
+          <li class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}" on-tap="{{ pulse }}" data-url="{{ tech.url }}">
+            <div class="{{ { circle: true, large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
+              <img src="{{ tech.logo }}" class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">
+            </div>
+            <h3 class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ tech.name }}</h3>
+          </li>
+        </template>
+      </ul>
 
     </section>
 
   </template>
 
   <script>
+
     Polymer('a-skill', {
-      animate : function (event, detail, sender) {
-        var animation = sender;
-        animation.target = sender.querySelector('#target');
+
+      created : function () {
+        this.url = '';
+      },
+
+      pulse : function (event) {
+        var target = event.currentTarget;
+        var animation = this.$.pulse.$.animation;
+        this.url = target.dataset.url;
+        animation.target = target;
         animation.play();
       }
+
     });
+    
   </script>
 
 </polymer-element>

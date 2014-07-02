@@ -1,0 +1,51 @@
+<polymer-element name="animate-pulse" attributes="url">
+
+  <template>
+
+    <core-animation duration="500" id="animation">
+
+      <core-animation-keyframe offset="0">
+        <core-animation-prop name="transform" value="scale(1)">
+        </core-animation-prop>
+      </core-animation-keyframe>
+
+      <core-animation-keyframe offset=".5">
+        <core-animation-prop name="transform" value="scale(1.4)">
+        </core-animation-prop>
+      </core-animation-keyframe>
+
+      <core-animation-keyframe offset=".7">
+        <core-animation-prop name="transform" value="scale(.7)">
+        </core-animation-prop>
+      </core-animation-keyframe>
+
+      <core-animation-keyframe offset=".8">
+        <core-animation-prop name="transform" value="scale(1.2)">
+        </core-animation-prop>
+      </core-animation-keyframe>
+
+      <core-animation-keyframe offset="1">
+        <core-animation-prop name="transform" value="scale(1)">
+        </core-animation-prop>
+      </core-animation-keyframe>
+
+    </core-animation>
+
+  </template>
+
+  <script>
+
+  Polymer('animate-pulse', {
+
+    ready : function () {
+      //  Add a listener for animation end
+      this.addEventListener('core-animation-finish', function() {
+        document.location.href = this.url;
+      }.bind(this));
+    }
+
+  });
+
+  </script>
+
+</polymer-element>

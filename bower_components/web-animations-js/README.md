@@ -37,7 +37,7 @@ a `<div>` over 0.5 seconds. The animation alternates producing a pulsing effect.
           {opacity: "1.0", transform: "scale(1)"}
         ],
         {
-          direction: "alternate", duration: 0.5, iterations: Infinity
+          direction: "alternate", duration: 500, iterations: Infinity
         }));
     </script>
 
@@ -52,7 +52,7 @@ important ones here: Animations, AnimationEffects, TimingDictionaries, TimingGro
 An `Animation` object defines a single animation effect that applies to a single element target. For example:
 
     var animation = new Animation(targetElement,
-        [{left: '0px'}, {left: '100px'}], 2);
+        [{left: '0px'}, {left: '100px'}], 2000);
 
 Here, the target element's "left" CSS property is modified smoothly from `0px` to `100px` over 2 seconds.
 
@@ -98,7 +98,7 @@ A `MotionPathEffect` allows elements to be animated along SVG-style paths. For e
     </svg>
     <script>
       var animFunc = new MotionPathEffect(document.querySelector('#path').pathSegList);
-      var animation = new Animation(targetElement, animFunc, 2);
+      var animation = new Animation(targetElement, animFunc, 2000);
     </script>
 
 #### Custom animation effects
@@ -139,7 +139,7 @@ Groups also take an optional TimingDictionary parameter (see below), which among
 TimingDictionaries are used to control the internal timing of an animation (players control how an animation progresses relative to document time). TimingDictionaries have several properties that can be tweaked:
 
 - **duration**: the duration of a single iteration of the animation
-- **iterations**: the number of iterations of the animation that will be played (fractional iterationss are allowed)
+- **iterations**: the number of iterations of the animation that will be played (fractional iterations are allowed)
 - **iterationStart**: the start offset of the first iteration
 - **fill**: whether the animation has effect before starting the first iteration and/or after finishing the final iteration
 - **delay**: the time between the animation's start time and the first animation effect of the animation
@@ -155,18 +155,18 @@ backwards fills, and animation forwards fills. There are a few simple rules whic
 - Animations only fill beyond their parent iteration if:
     - the relevant fill value is selected for the animation;
     - the matching fill value is selected for the parent; and
-    - this is the first parent iteration (for `fill: 'backward'`) or last parent iteration (for `fill: 'forward'`)
+    - this is the first parent iteration (for `fill: 'backwards'`) or last parent iteration (for `fill: 'forwards'`)
 - Missing `duration` values for TimingGroups are generated based on the calculated durations of the child animations.
 
 The following example illustrates these rules:
 
     var animationGroup = new AnimationGroup([
       new AnimationSequence([
-        new Animation(..., {duration: 3}),
-        new Animation(..., {duration: 5, fill: 'both'})
-      ], {duration: 6, delay: 3, fill: 'none'}),
-      new Animation(..., {duration: 8, fill: 'forward'})
-    ], {iterations: 2, fill: 'forward'});
+        new Animation(..., {duration: 3000}),
+        new Animation(..., {duration: 5000, fill: 'both'})
+      ], {duration: 6000, delay: 3000, fill: 'none'}),
+      new Animation(..., {duration: 8000, fill: 'forwards'})
+    ], {iterations: 2, fill: 'forwards'});
 
 In this example:
 
@@ -175,7 +175,7 @@ second child animation will only play for the first 3 of its 5 second duration
 - The `AnimationGroup` has no explicit duration, and will be provided with a
 calculated duration of the max (`duration + delay`) of its children - in this case 9 seconds.
 - Although `fill: "both"` is specified for the second `Animation` within the `AnimationSequence`, the `AnimationSequence` itself has a `fill` of "none". Hence, as the animation ends right at the end of the `AnimationSequence`, the animation will only fill backwards, and only up until the boundary of the `AnimationSequence` (i.e. 3 seconds after the start of the `AnimationGroup`).
-- The `Animation` inside the `AnimationGroup` and the `AnimationGroup` are both `fill: "forward"`. Therefore the animation will fill forward in two places: 
+- The `Animation` inside the `AnimationGroup` and the `AnimationGroup` are both `fill: "forwards"`. Therefore the animation will fill forward in two places: 
     - from 8 seconds after the `AnimationGroup` starts until the second iteration of the `AnimationGroup` starts (i.e. for 1 second)
     - from 17 seconds after the `AnimationGroup` starts, extending forward indefinitely.
 
@@ -211,11 +211,11 @@ following approach to prefix handling:
 writing animated properties back to the platform.
 - where possible, the polyfill will *only* accept unprefixed versions of experimental features. For example:
 
-        var animation = new Animation(elem, {"transform": "translate(100px, 100px)"}, 2);
+        var animation = new Animation(elem, {"transform": "translate(100px, 100px)"}, 2000);
 
   will work in all browsers that implement a conforming version of `transform`, but
 
-        var animation =  new Animation(elem, {"-webkit-transform": "translate(100px, 100px)"}, 2);
+        var animation =  new Animation(elem, {"-webkit-transform": "translate(100px, 100px)"}, 2000);
     
   will not work anywhere.
 

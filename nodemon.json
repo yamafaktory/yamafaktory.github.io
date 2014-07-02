@@ -1,5 +1,11 @@
 {
+  "watch": [
+    "./src/html/",
+    "./src/css/",
+    "./src/images/"
+  ],
   "execMap": {
     "js": "node --harmony"
-  }
+  },
+  "ext" : "css html jpg js svg"
 }

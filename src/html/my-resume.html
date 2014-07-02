@@ -1,12 +1,8 @@
-<link rel="import" href="../../bower_components/polymer-media-query/polymer-media-query.html">
-
-<link rel="import" href="../../bower_components/polymer-flex-layout/polymer-flex-layout.html">
-
-<link rel="import" href="../../bower_components/polymer-animation/polymer-animation.html">
-
-<link rel="import" href="../../bower_components/polymer-animation/polymer-flip.html">
+<link rel="import" href="../../bower_components/core-animation/core-animation.html">
+<link rel="import" href="../../bower_components/core-media-query/core-media-query.html">
 
 <link rel="import" href="a-skill.html">
+<link rel="import" href="animate-pulse.html">
 
 <polymer-element name="my-resume">
 
@@ -48,6 +44,7 @@
         font-size: 1.2rem;
         line-height: 1.8rem;
         color: rgba(50, 50, 50, 1);
+        text-align: center;
       }
 
       footer p.large {
@@ -78,12 +75,13 @@
       #name {
         width: 100%;
         position: fixed;
-        z-index: 1;
+        z-index: -1;
       }
 
       #name h1 {
         font-weight: 700;
         color: rgba(255, 255, 255, .8);
+        text-align: right;
       }
 
       #name strong {
@@ -104,11 +102,11 @@
 
     </style>
 
-    <polymer-media-query query="max-width: 40rem" queryMatches="{{ devices.mobile }}"></polymer-media-query>
-    <polymer-media-query query="(min-width: 40.063rem) and (max-width: 64rem)" queryMatches="{{ devices.medium }}"></polymer-media-query>
-    <polymer-media-query query="(min-width: 64.063rem) and (max-width: 90rem)" queryMatches="{{ devices.large }}"></polymer-media-query>
-    <polymer-media-query query="(min-width: 90.063rem) and (max-width: 120rem)" queryMatches="{{ devices.xlarge }}"></polymer-media-query>
-    <polymer-media-query query="min-width: 120.063rem" queryMatches="{{ devices.xxlarge }}"></polymer-media-query>
+    <core-media-query query="max-width: 40em" queryMatches="{{ devices.mobile }}"></core-media-query>
+    <core-media-query query="(min-width: 40.063em) and (max-width: 64em)" queryMatches="{{ devices.medium }}"></core-media-query>
+    <core-media-query query="(min-width: 64.063em) and (max-width: 90em)" queryMatches="{{ devices.large }}"></core-media-query>
+    <core-media-query query="(min-width: 90.063em) and (max-width: 120em)" queryMatches="{{ devices.xlarge }}"></core-media-query>
+    <core-media-query query="min-width: 120.063em" queryMatches="{{ devices.xxlarge }}"></core-media-query>
 
     <template if="{{ devices.mobile }}">
       <style>
@@ -117,13 +115,21 @@
           margin-top: 290px;
         }
 
+        #name {
+          height: 290px;
+        }
+
         #name h1 {
           font-size: 2rem;
-          margin: 4rem 4rem 0 4rem;
+          margin: 0 2rem 2rem 2rem;
         }
 
         #name strong {
           font-size: 3rem;
+        }
+
+        #title {
+          text-align: center;
         }
 
       </style>
@@ -132,15 +138,25 @@
     <template if="{{ devices.medium }}">
       <style>
 
-        header { margin-top: 464px; }
+        header {
+          margin-top: 464px;
+        }
+
+        #name {
+          height: 464px;
+        }
 
         #name h1 {
           font-size: 3rem;
-          margin: 6rem 6rem 0 6rem;
+          margin: 0 3rem 3rem 3rem;
         }
 
         #name strong {
           font-size: 4rem;
+        }
+
+        #title {
+          text-align: center;
         }
 
       </style>
@@ -153,9 +169,13 @@
           margin-top: 653px;
         }
 
+        #name {
+          height: 653px;
+        }
+
         #name h1 {
           font-size: 4rem;
-          margin: 8rem 8rem 0 8rem;
+          margin: 0 4rem 4rem 4rem;
         }
 
         #name strong {
@@ -171,9 +191,13 @@
           margin-top: 871px;
         }
 
+        #name {
+          height: 871px;
+        }
+
         #name h1 {
           font-size: 5rem;
-          margin: 10rem 10rem 0 10rem;
+          margin: 0 5rem 5rem 5rem;
         }
 
         #name strong {
@@ -190,9 +214,13 @@
           margin-top: 1161px;
         }
 
+        #name {
+          height: 1161px;
+        }
+
         #name h1 {
           font-size: 6rem;
-          margin: 3rem 3rem 0 3rem;
+          margin: 0 6rem 6rem 6rem;
         }
 
         #name strong {
@@ -202,66 +230,50 @@
       </style>
     </template>
 
-    <div id="name">
-      <polymer-flex-layout isContainer justify="end">
-        <h1 align="right"><strong>Hi!</strong><br>My name is Davy Duperron.</h1>
-      </polymer-flex-layout>
+    <div horizontal end-justified layout center id="name">
+      <h1><strong>Hi!</strong><br>My name is Davy Duperron.</h1>
     </div>
       
-    <polymer-flex-layout isContainer vertical align="center" justify="center">
-
-      <header>
-
-        <template if="{{ devices.mobile || devices.medium }}">
-          <polymer-flex-layout isContainer vertical align="center" justify="center">
-            <img src="/build/images/me-mobile.jpg" id="me">
-            <h1 align="center" id="title">
-              I am a full stack developer.<br>
-              I create <strong>quality products</strong> that use relevant web technologies.<br>
-              I am fond of learning everything related to the web and using <strong>bleeding-edge technologies</strong>.
-            </h1>
-          </polymer-flex-layout>
-        </template>
-
-        <template if="{{ devices.large || devices.xlarge || devices.xxlarge }}">
-          <polymer-flex-layout isContainer align="center" justify="center">
-            <img src="/build/images/me-large.jpg" id="me" class="large">
-            <h1 align="start" id="title" class="large">
-              I am a full stack developer.<br>
-              I create <strong>quality products</strong> that use relevant web technologies.<br>
-              I am fond of learning everything related to the web and using <strong>bleeding-edge technologies</strong>.
-            </h1>
-          </polymer-flex-layout>
-        </template>
-
+    <template if="{{ devices.mobile || devices.medium }}">
+      <header vertical center-justified layout center>
+        <img src="/build/images/me-mobile.jpg" id="me">
+        <h1 id="title">
+          I am a full stack developer.<br>
+          I create <strong>quality products</strong> that use relevant web technologies.<br>
+          I am fond of learning everything related to the web and using <strong>bleeding-edge technologies</strong>.
+        </h1>
       </header>
+    </template>
 
-      <main>
+    <template if="{{ devices.large || devices.xlarge || devices.xxlarge }}">
+      <header horizontal center-justified layout center>
+        <img src="/build/images/me-large.jpg" id="me" class="large">
+        <h1 id="title" class="large">
+          I am a full stack developer.<br>
+          I create <strong>quality products</strong> that use relevant web technologies.<br>
+          I am fond of learning everything related to the web and using <strong>bleeding-edge technologies</strong>.
+        </h1>
+      </header>
+    </template>
 
-        <polymer-flex-layout isContainer vertical align="center" justify="center">
+    <main vertical center-justified layout center>
 
-        <template repeat="{{ skill in skills }}">
-          <a-skill type="{{ skill }}" devices="{{ devices }}"></a-skill>
-        </template>
+      <template repeat="{{ skill in skills }}">
+        <a-skill type="{{ skill }}" devices="{{ devices }}"></a-skill>
+      </template>
 
-        </polymer-flex-layout>
+    </main>
 
-      </main>
+    <footer vertical center-justified layout center>
+      
+      <p class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">If you're interested in knowing more about me, follow me on <a href="https://twitter.com/yamafaktory">Twitter</a>. Connect with me on <a href="http://www.linkedin.com/in/davyduperron">LinkedIn</a>. Fork me on <a href="https://github.com/yamafaktory/yamafaktory.github.io">GitHub</a>.</p>
 
-      <footer>
-        
-        <polymer-flex-layout isContainer align="center" justify="center">
-
-            <p class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">If you're interested in knowing more about me, follow me on <a href="https://twitter.com/yamafaktory">Twitter</a>. Connect with me on <a href="http://www.linkedin.com/in/davyduperron">LinkedIn</a>. Fork me on <a href="https://github.com/yamafaktory/yamafaktory.github.io">GitHub</a>.</p>
-
-        </polymer-flex-layout>
-
-      </footer>
-
-    </polymer-flex-layout>
+    </footer>
 
   </template>
+
   <script>
+
     Polymer('my-resume', {
       ready : function () {
         this.devices = {},
@@ -313,6 +325,7 @@
         ];
       }
     });
+
   </script>
 
 </polymer-element>
