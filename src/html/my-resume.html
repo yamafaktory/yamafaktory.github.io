@@ -26,9 +26,9 @@
       }
 
       h1,
-      p,
       strong {
         font-family: "Libre Baskerville", serif;
+        font-weight: 400;
       }
 
       strong {
@@ -40,6 +40,8 @@
       }
 
       footer p {
+        font-family: "Open Sans", sans-serif;
+        font-weight: 300;
         margin: 6rem 3rem 6rem 3rem;
         font-size: 1.2rem;
         line-height: 1.8rem;
@@ -48,7 +50,8 @@
       }
 
       footer p.large {
-        font-size: 1.4rem;
+        font-weight: 400;
+        font-size: 1.3rem;
         line-height: 2.2rem;
       }
 
@@ -280,7 +283,11 @@
         this.skills = [
           { color : 'prune',
             name : 'Front-end',
-            description : 'For years, I am stuck in love with web technologies (object-oriented & vanilla JavaScript, HTML5, CSS3, canvas, DOM, jQuery, JSON, Angular, Polymer, websockets). I have strong fundamentals in the development of complex responsive applications for the Web relying on modern tools (automation with Gulp / Grunt for minifying - concatenating - even JSHint-ing resources, templates, CSS preprocessors). Moreover, I do care about performance and mobile-first web design.',
+            description : [
+              'For years, I am stuck in love with web technologies (object-oriented & vanilla JavaScript, HTML5, CSS3, canvas, DOM, jQuery, JSON, Angular, Polymer, websockets).',
+              'I have strong fundamentals in the development of complex responsive applications for the Web relying on modern tools (automation with Gulp or Grunt for minifying - concatenating - even JSHint-ing resources, templates, CSS preprocessors like Myth or Sass, Bower).',
+              'Moreover, I do care about performance and mobile-first web design.'
+            ],
             technologies : [
               { name : 'Angular',
                 url : 'https://angularjs.org/',
@@ -314,7 +321,10 @@
           },
           { color: 'grey',
             name : 'Back-end',
-            description : 'I - git - push code relying on the event-driven architecture of the Node.js platform, using web application frameworks such as Express and Koa. Furthermore, I love NoSQL databases.',
+            description : [
+              'I - git - push code relying on the event-driven architecture of the Node.js platform, using web application frameworks such as Express and Koa.',
+              ' Furthermore, I love NoSQL databases.'
+            ],
             technologies : [
               { name : 'GitHub',
                 url : 'https://github.com/',

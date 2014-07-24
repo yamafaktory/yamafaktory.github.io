@@ -21,7 +21,7 @@ body {
 
 /*  Mobile */
 
-@media only screen and (max-width: 40rem) {
+@media only screen and (max-width: 40em) {
   html {
     background: url("../images/mountain-mobile.jpg") no-repeat top center fixed;
   }
@@ -29,7 +29,7 @@ body {
 
 /*  Medium */
 
-@media only screen and (min-width: 40.063rem) and (max-width: 64rem) {
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
   html {
     background: url("../images/mountain-medium.jpg") no-repeat top center fixed;
   }
@@ -37,7 +37,7 @@ body {
 
 /*  large */
 
-@media only screen and (min-width: 64.063rem) and (max-width: 90rem) {
+@media only screen and (min-width: 64.063em) and (max-width: 90em) {
   html {
     background: url("../images/mountain-large.jpg") no-repeat top center fixed;
   }
@@ -45,7 +45,7 @@ body {
 
 /*  xlarge */
 
-@media only screen and (min-width: 90.063rem) and (max-width: 120rem) {
+@media only screen and (min-width: 90.063em) and (max-width: 120em) {
   html {
     background: url("../images/mountain-xlarge.jpg") no-repeat top center fixed;
   }
@@ -53,7 +53,7 @@ body {
 
 /*  xxlarge */
 
-@media only screen and min-width: 120.063rem {
+@media only screen and min-width: 120.063em {
   html {
     background: url("../images/mountain-xxlarge.jpg") no-repeat top center fixed;
   }

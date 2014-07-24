@@ -22,19 +22,22 @@
 
       h2 {
         font-family: "Libre Baskerville", serif;
+        font-weight: 700;
         font-size: 2rem;
         margin: 3rem 3rem 1rem 3rem;
       }
 
       h3 {
         font-family: "Open Sans", sans-serif;
-        font-size: 1rem;
         font-weight: 700;
+        font-size: 1rem;
         text-align: center;
       }
 
       p {
-        margin: 1rem 3rem 3rem 3rem;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 300;
+        margin: 1rem 3rem 1rem 3rem;
         font-size: 1.2rem;
         line-height: 1.8rem;
       }
@@ -50,7 +53,8 @@
       }
 
       p.large {
-        font-size: 1.4rem;
+        font-weight: 400;
+        font-size: 1.3rem;
         line-height: 2.2rem;
       }
 
@@ -137,7 +141,9 @@
 
       <article>
         <h2 class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ type.name }}</h2>
-        <p class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ type.description }}</p>
+        <template repeat="{{ desc in type.description }}">
+          <p class="{{ { large: devices.large || devices.xlarge || devices.xxlarge } | tokenList }}">{{ desc }}</p>
+        </template>
       </article>
 
       <ul>
